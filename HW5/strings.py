@@ -46,17 +46,20 @@
 # Задание 5: Написать валидатор для почты. Пользователь вводит почту, а программа должна проверить, что в почте есть символ '@' и '.',
 # и если это так, то вывести "YES", иначе "NO"
 
-email = input('Enter your email: ')
+# email = input('Enter your email: ')
 
+#1
 # if '@' in email and '.' in email:
 #     print('YES')
 # else:
 #     print('NO')
-indx_1 = email.index('@')
-indx_2 = email.rfind('.')
-count_indx = email.count('@')
-print(count_indx)
-if '@' in email and '.' in email[indx_1 + 1 :] and len(email[:indx_1]) > 0 and len(email[indx_1 + 1:indx_2]) > 0 and len(email[indx_2 + 1:]) > 1 and count_indx == 1:
-    print('YES')
-else:
-    print('NO')
+
+#2
+# indx_1 = email.index('@')
+# indx_2 = email.rfind('.')
+# count_indx = email.count('@')
+#
+# if '@' in email and '.' in email[indx_1 + 1 :] and len(email[:indx_1]) > 0 and len(email[indx_1 + 1:indx_2]) > 0 and len(email[indx_2 + 1:]) > 1 and count_indx == 1:
+#     print('YES')
+# else:
+#     print('NO')
