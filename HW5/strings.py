@@ -18,7 +18,7 @@
 
 # Задание 3:Пользователь вводит строку. Если она начинается на 'abc', то заменить их на 'www', иначе добавить в конец строки 'zzz'
 
-# user_input = input('Enter yout string: ')
+# user_input = input('Enter your string: ')
 #
 # if user_input.startswith('abc'):
 #     user_input = user_input.replace('abc', 'www')
@@ -28,7 +28,7 @@
 
 # Задание 4: Пользователь вводит текст, удалить в тексте все цифры и вывести строку пользователю.
 
-# # 1
+# 1
 # text = input('Enter your text: ')
 # for i in text:
 #     if i.isdigit():
@@ -46,7 +46,7 @@
 # Задание 5: Написать валидатор для почты. Пользователь вводит почту, а программа должна проверить, что в почте есть символ '@' и '.',
 # и если это так, то вывести "YES", иначе "NO"
 
-# email = input('Enter your email: ')
+
 
 #1
 # if '@' in email and '.' in email:
@@ -54,12 +54,24 @@
 # else:
 #     print('NO')
 
-#2
-# indx_1 = email.index('@')
-# indx_2 = email.rfind('.')
-# count_indx = email.count('@')
-#
-# if '@' in email and '.' in email[indx_1 + 1 :] and len(email[:indx_1]) > 0 and len(email[indx_1 + 1:indx_2]) > 0 and len(email[indx_2 + 1:]) > 1 and count_indx == 1:
-#     print('YES')
-# else:
-#     print('NO')
+#2 Учла не все условия, но для примера: один символ @ в строке, наличие @ в строке, точка в доменной части урлы, хотя бы один символ в именной части урлы,
+# хотя бы один символ между @ и точкой, хотя бы 2 символа в области урлы где домен верхнего уровня(после последней точки), чтобы спецсиволы и пробел не использовались в качестве символа
+
+# flag = False
+# sym_flag = False
+# while not flag:
+#     email = input('Enter your email: ')
+#     if email != '':
+#         flag = True
+#         if email.count('@') == 1 and '@' in email and '.' in email[email.index('@') + 1:] and len(email[:email.index('@')]) > 0 and len(email[email.index('@') + 1:email.rfind('.')]) > 0 and len(email[email.rfind('.') + 1:]) > 1:
+#             for i in email:
+#                 if i in ['<', '>', '(', ')', '[', ']', ',', ';', ':', '\\', '/', '"', ' ']:
+#                     print('NO')
+#                     sym_flag = True
+#                     break
+#             if not sym_flag:
+#                 print('YES')
+#         else:
+#             print('NO')
+#     else:
+#         print('Email can\'t be empty field')
