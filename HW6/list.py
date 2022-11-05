@@ -1,4 +1,4 @@
-# Задание 1: Запросить у пользователя 5 чисел и записать их в список
+# # Задание 1: Запросить у пользователя 5 чисел и записать их в список
 # my_list = []
 # for _ in range(5):
 #     my_list.append(int(input('Enter a number: ')))
@@ -10,7 +10,8 @@
 # A.pop()
 # print(A)
 
-# Задание 3:Запросить у пользователя 10 чисел и записать их в список A
+# Задание 3:
+# Запросить у пользователя 10 чисел и записать их в список A
 # Запросить у пользователя число N
 # Вывести пользователю сколько в списке A повторяется число N
 
@@ -60,8 +61,8 @@
 #         minimum = A[i]
 #
 # print(A)
-# print(maximum)
-# print(minimum)
+# print(f'Max number is {maximum}')
+# print(f'Min number is {minimum}')
 
 #Задание 7: Пользователь вводит текст нужно вывести количество чисел в этом тексте
 #
@@ -74,5 +75,5 @@
 # for i in text:
 #     if not i.isdigit():
 #         text = text.replace(i,' ')
-# text_list = [i for i in text.split(' ') if i.isdigit()]
-# print(f'Количество чисел: {len(text_list)}')
+# num_list = [i for i in text.split(' ') if i.isdigit()]
+# print(f'Количество чисел: {len(num_list)}')
