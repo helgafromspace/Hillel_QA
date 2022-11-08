@@ -1,6 +1,6 @@
 #Задание 1: Дан файл с произвольным текстом, необходимо найти все числа в файле и записать в список numbers
 
-f = open('text.txt', 'r')
+f = open('text_1_task.txt', 'r')
 data = f.readline()
 data_list = ''
 while data:
