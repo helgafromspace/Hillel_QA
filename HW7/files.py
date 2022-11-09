@@ -63,3 +63,21 @@
 # 'как' - 9 раз
 # 'у' - 7
 # 'world' - 4
+
+# f = open('files/top_strings.txt', 'r')
+# data = f.read().lower()
+# for i in data:
+#     if not i.isalpha():
+#         data = data.replace(i, ' ')
+# words_list = [i for i in data.split(' ') if i.isalpha()]
+# dict = {}
+# for word in words_list:
+#     dict[word] = dict.get(word, 0) + 1
+# sorted_dict = {}
+# sorted_keys = sorted(dict, key=dict.get, reverse=True)[:5]
+# for w in sorted_keys:
+#     sorted_dict[w] = dict[w]
+# for key, value in sorted_dict.items():
+#     print(f'{key} - {value}')
+#
+# f.close()

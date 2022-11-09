@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1e4f1dce-0fe1-470e-a7c3-fa4a32344d12" name="Changes" comment="organize txt files" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2GS19ikyhFtU6W0sR080MfdDS6q" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "/home/helga/Hillel_QA/HW7"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/HW7" />
+      <recent name="$PROJECT_DIR$/HW5" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/HW7/files" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1e4f1dce-0fe1-470e-a7c3-fa4a32344d12" name="Changes" comment="" />
+      <created>1666367021180</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1666367021180</updated>
+    </task>
+    <task id="LOCAL-00001" summary="add tasks">
+      <created>1666367622130</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666367622130</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add tasks">
+      <created>1666702787150</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666702787150</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add tasks with triangles">
+      <created>1666705310639</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1666705310639</updated>
+    </task>
+    <task id="LOCAL-00004" summary="corrected conditions in task 2; code refactoring in task3">
+      <created>1666711487084</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666711487084</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add tasks">
+      <created>1666999441920</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1666999441920</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add conditions to task 5">
+      <created>1666999970013</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1666999970013</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add conditions to task 5; code refactoring">
+      <created>1667139226489</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1667139226489</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add tasks">
+      <created>1667658904230</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667658904230</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add tasks">
+      <created>1667658996697</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1667658996697</updated>
+    </task>
+    <task id="LOCAL-00010" summary="add descriptions to print function in tasks">
+      <created>1667681136075</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1667681136075</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add 1 task">
+      <created>1667929138120</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1667929138120</updated>
+    </task>
+    <task id="LOCAL-00012" summary="add 1 task">
+      <created>1667929276173</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1667929276173</updated>
+    </task>
+    <task id="LOCAL-00013" summary="add 1 task">
+      <created>1667929647883</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1667929647883</updated>
+    </task>
+    <task id="LOCAL-00014" summary="add 1 task">
+      <created>1667929709600</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1667929709600</updated>
+    </task>
+    <task id="LOCAL-00015" summary="add 1 task">
+      <created>1667929722115</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1667929722115</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add 1 task">
+      <created>1667929741258</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1667929741258</updated>
+    </task>
+    <task id="LOCAL-00017" summary="add tasks 2-6">
+      <created>1667958027878</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1667958027878</updated>
+    </task>
+    <task id="LOCAL-00018" summary="organize txt files">
+      <created>1667958531585</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1667958531585</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add tasks with triangles" />
+    <MESSAGE value="corrected conditions in task 2; code refactoring in task3" />
+    <MESSAGE value="add conditions to task 5" />
+    <MESSAGE value="add conditions to task 5; code refactoring" />
+    <MESSAGE value="add tasks" />
+    <MESSAGE value="add descriptions to print function in tasks" />
+    <MESSAGE value="add 1 task" />
+    <MESSAGE value="add tasks 2-6" />
+    <MESSAGE value="organize txt files" />
+    <option name="LAST_COMMIT_MESSAGE" value="organize txt files" />
+  </component>
+</project>
