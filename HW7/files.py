@@ -1,6 +1,6 @@
 #Задание 1: Дан файл с произвольным текстом, необходимо найти все числа в файле и записать в список numbers
 
-# f = open('text_1_task.txt', 'r')
+# f = open('files/text_1_task.txt', 'r')
 # data = f.read()
 # for i in data:
 #     if not i.isdigit():
@@ -13,13 +13,13 @@
 #Задание 2: Запросить у пользователя текст и записать его в файл data.txt
 
 # text = input('Enter your text: ')
-# with open('data.txt', 'w') as f:
+# with open('files/data.txt', 'w') as f:
 #     f.write(text)
 # f.close()
 
 # Задание 3: Запросить у пользователя число N и запросить N чисел у пользователя, потом записать их в файл numbers.txt через пробел
 
-# with open('numbers.txt', 'w', encoding = 'utf-8') as f:
+# with open('files/numbers.txt', 'w', encoding = 'utf-8') as f:
 #     N = int (input ('Enter number of digits: '))
 #     for _ in range(N):
 #         num = input(f'Enter digit {_ + 1}: ')
@@ -33,14 +33,14 @@
 #
 # numbers = [str(random.randint(1, 100)) + '\n' for i in range(100)]
 #
-# with open('random_numbers.txt', 'w', encoding = 'utf-8') as f:
+# with open('files/random_numbers.txt', 'w', encoding = 'utf-8') as f:
 #     f.writelines(numbers)
 #
 # f.close()
 
 #Задание 5: Дан файл с произвольным текстом(whatevertext.txt), нужно найти количество слов в файле и вывести пользователю
 
-# f = open('whatevertext.txt', 'r')
+# f = open('files/whatevertext.txt', 'r')
 # data = f.read()
 # for i in data:
 #     if not i.isalpha():
@@ -51,7 +51,7 @@
 
 #Задание 6: Дан файл в котором записаны числа через пробел, необходимо вывести пользователю сумму этих чисел
 
-# f = open('numbers_list.txt', 'r')
+# f = open('files/numbers_list.txt', 'r')
 # data = [int(i) for i in f.read().split(' ')]
 # print(sum(data))
 # f.close()
