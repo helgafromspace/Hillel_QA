@@ -81,17 +81,15 @@
 #     print(f'{key} - {value}')
 #
 # f.close()
+
 # from collections import *
-#
-# cnt = Counter()
 # f = open('files/top_strings.txt', 'r')
 # data = f.read().lower()
 # for i in data:
 #     if not i.isalpha():
 #         data = data.replace(i, ' ')
 # words_list = [i for i in data.split(' ') if i.isalpha()]
-# for word in words_list:
-#     cnt[word] += 1
+# cnt = Counter(words_list)
 # sorted_keys = sorted(cnt, key=cnt.get, reverse=True)[:5]
 # sorted_dict = {}
 # for w in sorted_keys:
