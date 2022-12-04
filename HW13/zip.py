@@ -14,9 +14,9 @@ seq1 = [1, 2, 3, 4, 5]
 seq2 = [9, 8, 7]
 
 
-from typing import Iterable, List
+from typing import Iterable, List, Tuple
 
-def custom_zip(*sequences: Iterable, full=False, default=None) -> List[tuple]:
+def custom_zip(*sequences: Iterable, full=False, default=None) -> List[Tuple]:
     result = []
     long_seq = max(seq1, seq2, key=len)
     short_seq = min(seq1, seq2, key=len)
