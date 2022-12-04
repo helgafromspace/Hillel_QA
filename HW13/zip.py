@@ -17,18 +17,19 @@ seq2 = [9, 8, 7]
 from typing import Iterable, List
 
 def custom_zip(*sequences: Iterable, full=False, default=None) -> List[List]:
+    result = []
+    long_seq = max(seq1, seq2, key=len)
+    short_seq = min(seq1, seq2, key=len)
     if full:
-        result = []
-        if len(seq1) > len(seq2):
-            for i in range(len(seq1)):
-                if i < len(seq2):
-                    result.append((seq1[i], seq2[i]))
-                else:
-                    result.append((seq1[i], default))
-        else:
-            result = list(zip(*sequences))
+        for i in range(len(long_seq)):
+            if i < len(short_seq):
+                result.append((long_seq[i], short_seq[i]))
+            else:
+                result.append((long_seq[i], default))
     else:
-        result = list(zip(*sequences))
+        for i in range(len(short_seq)):
+            result.append((long_seq[i], short_seq[i]))
+        return result
     return result
 
 print(custom_zip(seq1, seq2))
