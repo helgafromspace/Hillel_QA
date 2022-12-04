@@ -6,16 +6,11 @@
 
 from typing import Callable, Iterable
 
-
 def sum(*args):
-    result = 0
-    for i in range(len(args)):
-        result += args[i]
-    return result
+    return [x + y for x, y in zip(*args)]
 
 def custom_map(function: Callable, *args: Iterable) -> Iterable:
-    result = list(map(function, *args))
+    result = function(*args)
     return result
 
 print(custom_map(sum, [1, 2, 3], [3, 5, 0, 5]))
-print(custom_map(sum, [1, 2, 3], [3, 5, 0, 5], [5, 6, 8], [1, 1]))
