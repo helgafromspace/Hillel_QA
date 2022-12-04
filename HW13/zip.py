@@ -13,6 +13,7 @@
 seq1 = [1, 2, 3, 4, 5]
 seq2 = [9, 8, 7]
 
+
 from typing import Iterable, List
 
 def custom_zip(*sequences: Iterable, full=False, default=None) -> List[List]:
