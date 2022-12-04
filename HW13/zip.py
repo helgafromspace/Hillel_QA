@@ -6,13 +6,12 @@
 # full=False - по умолчанию "склеить" последовательности по кратчайшей, иначе по самой длинной
 #
 # default=None - если full=True, вместо недостающих элементов поставить значение указанное в параметре default
-#
+
+# custom_zip(seq1, seq2) -> [(1, 9), (2, 8), (3, 7)])
+# custom_zip(seq1, seq2, full=True, default="Q") -> [(1, 9), (2, 8), (3, 7), (4, 'Q'), (5, 'Q')]
+
 seq1 = [1, 2, 3, 4, 5]
 seq2 = [9, 8, 7]
-# custom_zip(seq1, seq2) -> [(1, 9), (2, 8), (3, 7)])
-
-#
-# custom_zip(seq1, seq2, full=True, default="Q") -> [(1, 9), (2, 8), (3, 7), (4, 'Q'), (5, 'Q')]
 
 from typing import Iterable, List
 
@@ -29,7 +28,6 @@ def custom_zip(*sequences: Iterable, full=False, default=None) -> List[List]:
     else:
         for i in range(len(short_seq)):
             result.append((long_seq[i], short_seq[i]))
-        return result
     return result
 
 print(custom_zip(seq1, seq2))
