@@ -14,6 +14,7 @@ def sum(*args):
             sum += j
         result.append(sum)
     return result
+
 def custom_map(function: Callable, *args: Iterable) -> Iterable:
     result = function(*args)
     return result
