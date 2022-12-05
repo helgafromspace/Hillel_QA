@@ -7,7 +7,10 @@
 from typing import Callable, Iterable
 
 def custom_map(function: Callable, *args: Iterable) -> Iterable:
-    result = [function(i) for i in zip(*args)]
+    result = []
+    for i in zip(*args):
+        i = function(i)
+        result.append(i)
     return result
 
 print(custom_map(str,[1, 2, 3], [3, 5, 0, 5]))
