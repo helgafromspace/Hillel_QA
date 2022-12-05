@@ -10,5 +10,5 @@ def custom_map(function: Callable, *args: Iterable) -> Iterable:
     result = [function(i) for i in zip(*args)]
     return result
 
-print(custom_map(sum, [1, 2, 3], [3, 5, 0, 5]))
+print(custom_map(str,[1, 2, 3], [3, 5, 0, 5]))
 print(custom_map(sum, [1, 2, 3], [3, 5, 0, 5], [1, 1, 1]))
