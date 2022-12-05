@@ -18,8 +18,8 @@ from typing import Iterable, List, Tuple
 
 def custom_zip(*sequences: Iterable, full=False, default=None) -> List[Tuple]:
     result = []
-    long_seq = max(seq1, seq2, key=len)
-    short_seq = min(seq1, seq2, key=len)
+    long_seq = max(sequences, key=len)
+    short_seq = min(sequences, key=len)
     if full:
         for i in range(len(long_seq)):
             if i < len(short_seq):
