@@ -41,4 +41,4 @@ def custom_zip(*args: Iterable, full=False, default=None) -> List[Tuple] :
 print(custom_zip(seq1, seq2, seq3,seq4))
 print(custom_zip(seq1, seq2, seq3, seq4, full=False))
 print(custom_zip(seq1, seq2, seq3, seq4, full=True, default="Q"))
-print(custom_zip(seq1, seq2, seq4, full=True))
+print(custom_zip(seq1, seq2, seq3, seq4, full=True))
