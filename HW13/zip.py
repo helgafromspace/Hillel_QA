@@ -10,10 +10,7 @@
 # custom_zip(seq1, seq2) -> [(1, 9), (2, 8), (3, 7)])
 # custom_zip(seq1, seq2, full=True, default="Q") -> [(1, 9), (2, 8), (3, 7), (4, 'Q'), (5, 'Q')]
 
-seq1 = [1, 2, 3, 4, 5]
-seq2 = [9, 8, 7]
-seq3 = [5, 5, 2, 1]
-seq4 = [6, 6, 8, 9, 7, 5]
+
 
 from typing import Iterable, List, Tuple
 
@@ -23,11 +20,30 @@ from typing import Iterable, List, Tuple
 
 
 
+# def custom_zip(*args: Iterable, full=False, default=None) -> List[Tuple] :
+#     min_seq = min (args, key=len)
+#     max_seq = max (args, key=len)
+#     result = [[x] for x in args[0]]
+#     for i in range(1, len(args)):
+#         for j in range(len(result)):
+#             if j < len(args[i]):
+#                 result[j].append(args[i][j])
+#             else:
+#                 result[j].append(default)
+#     if full:
+#         return [tuple(i) for i in result]
+#     else:
+#         return [tuple(i) for i in result[:len(min_seq)]]
+
+seq1 = [1, 2, 3, 4, 5]
+seq2 = [9, 8, 7]
+seq3 = [6, 6, 8, 9, 7, 5]
+seq4 = seq1+seq3
 def custom_zip(*args: Iterable, full=False, default=None) -> List[Tuple] :
     min_seq = min (args, key=len)
     max_seq = max (args, key=len)
-    result = [[x] for x in args[0]]
-    for i in range(1, len(args)):
+    result = [[] for x in range(len(max_seq))]
+    for i in range(len(args)):
         for j in range(len(result)):
             if j < len(args[i]):
                 result[j].append(args[i][j])
@@ -37,7 +53,8 @@ def custom_zip(*args: Iterable, full=False, default=None) -> List[Tuple] :
         return [tuple(i) for i in result]
     else:
         return [tuple(i) for i in result[:len(min_seq)]]
-print(custom_zip(seq1, seq2, seq3))
+
+print(custom_zip(seq1, seq2, seq3,seq4))
 print(custom_zip(seq1, seq2, seq3, full=False))
 print(custom_zip(seq1, seq2, seq3, seq4, full=True, default="Q"))
 print(custom_zip(seq1, seq2, full=True))
