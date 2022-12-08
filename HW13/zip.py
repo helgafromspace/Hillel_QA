@@ -19,22 +19,6 @@ from typing import Iterable, List, Tuple
 # а проходить по всем последовательностям в том порядке в котором они переданы и добавлять свои или дефолтные элементы в зависимости от длины этой последовательности.
 
 
-
-# def custom_zip(*args: Iterable, full=False, default=None) -> List[Tuple] :
-#     min_seq = min (args, key=len)
-#     max_seq = max (args, key=len)
-#     result = [[x] for x in args[0]]
-#     for i in range(1, len(args)):
-#         for j in range(len(result)):
-#             if j < len(args[i]):
-#                 result[j].append(args[i][j])
-#             else:
-#                 result[j].append(default)
-#     if full:
-#         return [tuple(i) for i in result]
-#     else:
-#         return [tuple(i) for i in result[:len(min_seq)]]
-
 seq1 = [1, 2, 3, 4, 5]
 seq2 = [9, 8, 7]
 seq3 = [6, 6, 8, 9, 7, 5]
