@@ -13,32 +13,22 @@
 seq1 = [1, 2, 3, 4, 5]
 seq2 = [9, 8, 7]
 seq3 = [5, 5, 2, 1]
+seq4 = [6, 6, 8, 9, 7, 5]
 
 from typing import Iterable, List, Tuple
 
-# на 2 последовательности
+#Смотрел вторую версию незакоменченную. 70 за то что не работает, если переданные списки увеличиваются по длине.
+# Правильно будет как и написала определить какая последовательность самая длинная, но не брать ее как базовую (как у тебя реализовано),
+# а проходить по всем последовательностям в том порядке в котором они переданы и добавлять свои или дефолтные элементы в зависимости от длины этой последовательности.
 
-# def custom_zip(*sequences: Iterable, full=False, default=None) -> List[Tuple]:
-#     result = []
-#     long_seq = max(sequences, key=len)
-#     short_seq = min(sequences, key=len)
-#     if full:
-#         for i in range(len(long_seq)):
-#             if i < len(short_seq):
-#                 result.append((long_seq[i], short_seq[i]))
-#             else:
-#                 result.append((long_seq[i], default))
-#     else:
-#         for i in range(len(short_seq)):
-#             result.append((long_seq[i], short_seq[i]))
-#     return result
 
-# больше чем на 2
+
 def custom_zip(*args: Iterable, full=False, default=None) -> List[Tuple] :
     min_seq = min (args, key=len)
+    max_seq = max (args, key=len)
     result = [[x] for x in args[0]]
-    for i in range (1, len (args)) :
-        for j in range (len(result)):
+    for i in range(1, len(args)):
+        for j in range(len(result)):
             if j < len(args[i]):
                 result[j].append(args[i][j])
             else:
@@ -48,6 +38,6 @@ def custom_zip(*args: Iterable, full=False, default=None) -> List[Tuple] :
     else:
         return [tuple(i) for i in result[:len(min_seq)]]
 print(custom_zip(seq1, seq2, seq3))
-print(custom_zip(seq1, seq2, full=False))
-print(custom_zip(seq1, seq2,seq3, full=True, default="Q"))
+print(custom_zip(seq1, seq2, seq3, full=False))
+print(custom_zip(seq1, seq2, seq3, seq4, full=True, default="Q"))
 print(custom_zip(seq1, seq2, full=True))
