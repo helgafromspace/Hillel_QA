@@ -39,6 +39,4 @@ def custom_zip(*args: Iterable, full=False, default=None) -> List[Tuple] :
         return [tuple(i) for i in result[:len(min_seq)]]
 
 print(custom_zip(seq1, seq2, seq3,seq4))
-print(custom_zip(seq1, seq2, seq3, full=False))
 print(custom_zip(seq1, seq2, seq3, seq4, full=True, default="Q"))
-print(custom_zip(seq1, seq2, full=True))
