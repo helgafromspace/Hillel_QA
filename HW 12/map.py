@@ -2,7 +2,8 @@
 # к соответствующим элементам переданных итерируемых объектов.
 
 #Если переданные итерируемые объекты разной длины, то результат сформировать по кратчайшему итерируемому объекту.
-
+# sum2 = lambda x, y: x + y
+# sum3 = lambda x, y, z: x + y + z
 
 from typing import Callable, Iterable
 
@@ -13,8 +14,7 @@ def custom_map(function: Callable, *args: Iterable) -> Iterable:
         result.append(i)
     return result
 
-# sum2 = lambda x, y: x + y
-# sum3 = lambda x, y, z: x + y + z
+
 # assert custom_map(sum, [[1, 2, 3], [4, 5]]) == [6, 9]
 # assert custom_map(len, [[], (2, 4), [1, 3, 5, 7]]) == [0, 2, 4]
 # assert custom_map(str, (17, 23)) == ['17', '23']
