@@ -14,7 +14,7 @@
 # "Hello, cocroach. And where it is? Who, can do it?! Or vice versa!? Yes, it's difficult... Claro.." -> "Hello and who or yes claro."
 # "Hola..." -> Hola.
 
-text = "Hello, John cocroach. And where it is? Who, can do it?! Or vice versa!? Yes, it's difficult... Claro.."
+text = "Hello, cocroach. And where it is? Who, can do it?! Or vice versa!? Yes, it's difficult... Claro.."
 text2 = "Hola..."
 
 import re
