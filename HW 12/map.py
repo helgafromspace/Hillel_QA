@@ -8,20 +8,40 @@ sum3 = lambda x, y, z : x + y + z
 from typing import Callable, Iterable
 
 
+# def custom_map(function: Callable, *args: Iterable) -> Iterable :
+#     result = []
+#     count = 0
+#     for arg in args:
+#         count += 1
+#     if count == 1:
+#         for arg in args:
+#             for i in arg:
+#                 result.append(function(i))
+#     else:
+#         for arg in zip(*args):
+#             result.append(function(*arg))
+
+#     return result
+
+
 def custom_map(function: Callable, *args: Iterable) -> Iterable :
     result = []
-    count = 0
-    for arg in args:
-        count += 1
+    count = len(args)
+    # count = 0
+    # for arg in args:
+    #     count += 1
     if count == 1:
-        for arg in args:
-            for i in arg:
-                result.append(function(i))
+        # for arg in args:
+        #     for i in arg:
+        #         result.append(function(i))
+        for i in args[0]:
+            result.append(function(i))
     else:
         for arg in zip(*args):
             result.append(function(*arg))
 
     return result
+
 
 
 assert custom_map(sum, [[1, 2, 3], [4, 5]]) == [6, 9]
