@@ -12,29 +12,27 @@
 #   pass
 
 # "Hello, cocroach. And where it is? Who, can do it?! Or vice versa!? Yes, it's difficult... Claro.." -> "Hello and who or yes claro."
-#
 # "Hola..." -> Hola.
+
+text = "Hello, John cocroach. And where it is? Who, can do it?! Or vice versa!? Yes, it's difficult... Claro.."
+text2 = "Hola..."
 
 import re
 
-text = "Hello, Alex cocroach. And where it is? Who, can do it?! Or vice versa!? Yes, it's difficult... Claro.."
-# text = "Hola..."
-# pattern = '[A-Z]\w*'
-# re_obj = re.compile(pattern)
-# res = re_obj.findall(text)
-# res2 = ''
-# for i, word in enumerate(res):
-#     if i == 0:
-#         res2 += word + ' '
-#     else:
-#         res2 += word.lower() + ' '
-# res2 = res2.strip() + '.'
-#
-# print(res2)
+def generate_sentence(text: str) -> str:
 
+    pattern = '([A-Z][a-zA-Z]*),?\s?.*?[?.!]+'
+    re_obj = re.compile(pattern)
+    res = re_obj.findall(text)
+    res2 = ''
+    for i, word in enumerate(res):
+        if i == 0:
+            res2 += word + ' '
+        else:
+            res2 += word.lower() + ' '
+    res2 = res2.strip() + '.'
+    return res2
 
-pattern = '[A-Z]'
-re_obj = re.compile(pattern)
-res = re_obj.findall(text)
+print(generate_sentence(text))
+print(generate_sentence(text2))
 
-print(res)
