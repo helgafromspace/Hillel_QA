@@ -18,7 +18,7 @@ from datetime import date, datetime
 
 class Company:
 
-    status = 'active'
+    status = None
 
     def __init__(self, name, year_income, employees_count, foundation_year):
         self.name = name
