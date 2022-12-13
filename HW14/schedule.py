@@ -10,6 +10,30 @@
 # ...
 # Lecture 32: 02 Feb 2023 19:15
 
+# from datetime import timedelta, datetime,date
+#
+# start = datetime(2022, 10, 17, 19, 15)
+# start_str = start.strftime('%d %b %Y  %H:%M')
+# delta1 = timedelta(days=3)
+# delta2 = timedelta(days=4)
+#
+# lst =[]
+#
+# for i in range(32):
+#     start_str = start.strftime ('%d %b %Y  %H:%M')
+#     if i % 2 == 0:
+#         lst.append(f'Lecture {i+1}: {start_str}')
+#         start += delta1
+#     else:
+#         lst.append(f'Lecture {i+1}: {start_str}')
+#         start += delta2
+#
+# for i, el in enumerate(lst):
+#     if i < 9:
+#         el = el.split (' ')
+#         el[1] = ' ' + el[1]
+#         el = ' '.join(el)
+#     print(el)
 from datetime import timedelta, datetime,date
 
 start = datetime(2022, 10, 17, 19, 15)
@@ -17,20 +41,17 @@ start_str = start.strftime('%d %b %Y  %H:%M')
 delta1 = timedelta(days=3)
 delta2 = timedelta(days=4)
 
-lst =[]
+lst = []
 
 for i in range(32):
-    start_str = start.strftime ('%d %b %Y  %H:%M')
+    start_str = start.strftime ('%d %b %Y %H:%M')
     if i % 2 == 0:
-        lst.append(f'Lecture {i+1}: {start_str}')
+        lst.append(f'Lecture {i+1:>3d}: {start_str}')
         start += delta1
     else:
-        lst.append(f'Lecture {i+1}: {start_str}')
+        lst.append(f'Lecture {i+1:>3d}: {start_str}')
         start += delta2
+length = len(max(lst, key=len))
 
-for i, el in enumerate(lst):
-    if i < 9:
-        el = el.split (' ')
-        el[1] = ' ' + el[1]
-        el = ' '.join(el)
-    print(el)
+for i in lst:
+    print(i)
