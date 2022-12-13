@@ -98,7 +98,7 @@ class Employee:
 
     # проверка нанят ли работник
     def is_person_hired(self):
-        if self.hired and self.hired != None:
+        if self.hired:
             print('Yes')
         else:
             print('No')
