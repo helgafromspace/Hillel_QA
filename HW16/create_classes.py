@@ -15,16 +15,17 @@
 # Задание в том числе и на фантазию
 
 from datetime import date, datetime
-
+#
 class Company:
 
-    status = None
+    is_registered = True
 
-    def __init__(self, name, year_income, employees_count, foundation_year):
+    def __init__(self, name, year_income, employees_count, foundation_year, status):
         self.name = name
         self.year_income = year_income
         self.employees_count = employees_count
         self.foundation_year = foundation_year
+        self.status = status
 
     # считает возраст компании
     def company_age(self):
@@ -43,94 +44,138 @@ class Company:
     def change_status_to_active(self):
         self.status = 'active'
 
-    # добавить владельца
+    # удаление поля экземпляра
+    def del_attr(self, attr):
+        delattr(self, attr)
+
+    # изменение значения аттрибута экземпляра: например, чтобы добавив поле для всего класса с помощью функции add_class_attr, изменять значение аттрибута
+    # только для экземпляра, оставляя общий таким как есть
+    def update_attr(self, attr, value=None):
+        if hasattr(self, attr):
+            setattr(self, attr, value)
+            return f'Attribute \'{self.attr}\' added for {self.name} company with value {value}'
+        else:
+            return 'Instance doesn\'t have such attribute. Add this attribute to firstly'
+    # добавление поля к классу
     @classmethod
-    def add_owner(cls, owner=None):
-        cls.owner = owner
+    def add_class_attr(cls, attr, value=None):
+        if not hasattr(cls, attr):
+            setattr(cls, attr, value)
+            return f'{attr} attribute is added to class {cls.__name__}'
+        else:
+            return f'Attribute {attr} exists already'
+    # проверка есть ли такой поле в классе
+    @classmethod
+    def has_attribute(self, attr):
+        self.attr = attr
+        return hasattr(self, attr)
+
+    # удаление поля класса
+    @classmethod
+    def del_class_attr(cls, attr):
+        delattr(cls, attr)
+        return f'Attribute {attr} is deleted'
 
     @staticmethod
     # проверяет статус компании
     def is_company_active(company):
         print('Yes') if company.status == 'active' else print('No')
 
-adidas = Company('Adidas', 1200000000, 1000000, 1960)
-nike = Company('Nike', 556000000, 900000, 1950)
-candyshop = Company('CandyTM', 556000, 9000, 1980)
+adidas = Company('Adidas', 1200000000, 1000000, 1960, 'active')
+nike = Company('Nike', 556000000, 900000, 1950, 'active')
+candyshop = Company('CandyTM', 556000, 9000, 1980, 'active')
+
+# проверям есть ли поле 'country' в классе и в экземпляре
+
+print(Company.has_attribute('country'))
+print(adidas.has_attribute('country'))
+
+# добавляем поле  в класс и проверяем появилось ли оно в нем и у его эксземпляров
+print(Company.add_class_attr('country'))
+print(Company.country)
+print(nike.country)
+
+# пробуем добавить уже существующее поле - и получаем описанную в методе ошибку
+
+print(Company.add_class_attr('country'))
+
+# апдейт значения для экземпляра
+print(adidas.update_attr('country', 'USA'))
+
+# проверяем, что для поля класса и других экземпляров значение не изменилось
+print(Company.country)
+print(nike.country)
+
+# удаляем поле класса
+delattr(Company, 'country')
+
+# проверяем, что аттрибут удалился у класса и его экземпляров
+print(Company.has_attribute('country'))
+print(adidas.has_attribute('country'))
+
+# проверка статуса компании
 print(adidas.status)
+
+# изменение статуса и проверка того, что он изменился
 adidas.change_status_to_inactive()
 print(adidas.status)
-print(adidas.company_age())
-print(nike.company_age())
-print(adidas.month_avg_income())
-print(nike.month_avg_income())
-adidas.add_owner('Dassler')
-print(adidas.owner)
-nike.add_owner('Bauerman')
-print(nike.owner)
 adidas.is_company_active(adidas)
 candyshop.is_company_active(candyshop)
 
+# считаем возраст компании
+print(adidas.company_age())
+print(nike.company_age())
 
-class Employee:
+# считаем средний месячный доход
+print(adidas.month_avg_income())
+print(nike.month_avg_income())
 
-    hired = None
-
-    def __init__(self, name, surname, company, age, department, job, year_of_start):
-        self.name = name
-        self.surname = surname
-        self.company = company
-        self.age = age
-        self.department = department
-        self.job = job
-        self.year_of_start = year_of_start
-
-    # распечатка инфо о сотруднике
-    def print_info(self):
-        print(f'{self.name} {self.surname}: company - {self.company}, age: {self.age}, department: {self.department}, job: {self.job}.')
-
-    # получить срок работы работника в компании
-    def get_experience_term(self):
-        if self.hired:
-            now = date.today().year
-            return f'Employee {self.name} {self.surname} has {now - self.year_of_start} years of experience.'
-        else:
-            return 'Employee is fired.'
-
-    # проверка нанят ли работник
-    def is_person_hired(self):
-        if self.hired:
-            print('Yes')
-        else:
-            print('No')
-
-    # изменение статуса на "нанят"
-    @classmethod
-    def change_status_to_hired(cls):
-        cls.hired = True
-
-    # изменение статуса на "уволен"
-    @classmethod
-    def change_status_to_fired(cls):
-        cls.hired = False
-
-    @staticmethod
-    # начало работы
-    def start_mark():
-        print('Start.')
-
-
-
-ann = Employee('Anna', 'Johnes', 'Adidas', 25, 'Marketing', 'SMM', 2019)
-josh = Employee('Josh', 'Madsen', 'Nike', 35, 'Security', 'Guardian', 2020)
-josh.start_mark()
-ann.print_info()
-print(ann.get_experience_term())
-print(ann.hired)
-ann.change_status_to_hired()
-print(ann.hired)
-ann.is_person_hired()
-print(ann.get_experience_term())
-josh.change_status_to_hired()
-print(josh.hired)
-josh.change_status_to_fired()
-josh.is_person_hired()
+#
+#
+# class Employee:
+#
+#     year_salary_raise_value = 1.05
+#
+#     def __init__(self, name, surname, company, age, salary, job, year_of_start):
+#         self.name = name
+#         self.surname = surname
+#         self.company = company
+#         self.age = age
+#         self.salary = salary
+#         self.job = job
+#         self.year_of_start = year_of_start
+#
+#     # распечатка инфо о сотруднике
+#     def print_info(self):
+#         print(f'{self.name} {self.surname}: company - {self.company}, age: {self.age}, salary: {self.salary}, job: {self.job}.')
+#
+#     # получить срок работы работника в компании
+#     def get_experience_term(self):
+#         now = date.today().year
+#         return f'Employee {self.name} {self.surname} has {now - self.year_of_start} years of experience.'
+#
+#     def get_raised_salary(self):
+#         return round(self.salary * self.year_salary_raise_value)
+#
+#     #
+#     @classmethod
+#     def change_raise_value(cls, new_value):
+#         cls.year_salary_raise_value = new_value
+#         return cls.year_salary_raise_value
+#
+#     @staticmethod
+#     # начало работы
+#     def start_mark():
+#         print('Start.')
+# #
+# #
+# #
+# ann = Employee('Anna', 'Johnes', 'Adidas', 25, 3000, 'SMM', 2019)
+# josh = Employee('Josh', 'Madsen', 'Nike', 35, 2000, 'Guardian', 2020)
+# print(ann.get_raised_salary())
+# Employee.change_raise_value(1.1)
+# print(Employee.change_raise_value(1.1))
+# print(ann.get_raised_salary())
+# josh.start_mark()
+# ann.print_info()
+# print(ann.get_experience_term())
