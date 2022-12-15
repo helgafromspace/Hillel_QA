@@ -44,10 +44,6 @@ class Company:
     def change_status_to_active(self):
         self.status = 'active'
 
-    # удаление поля экземпляра
-    def del_attr(self, attr):
-        delattr(self, attr)
-
     # изменение значения аттрибута экземпляра: например, чтобы добавив поле для всего класса с помощью функции add_class_attr, изменять значение аттрибута
     # только для экземпляра, оставляя общий таким как есть
     def update_attr(self, attr, value=None):
@@ -104,92 +100,87 @@ print(adidas.update_attr('country', 'USA'))
 print(Company.country)
 print(nike.country)
 
-# проверка, что через экземпляр не получится удалить поле
-# delattr(adidas, 'country')
-# print(Company.has_attribute('country'))
-# print(adidas.has_attribute('country'))
-
 # удаляем поле класса
-delattr(Company, 'country')
+Company.del_class_attr('country')
 
 # проверяем, что аттрибут удалился у класса и его экземпляров
 print(Company.has_attribute('country'))
 print(adidas.has_attribute('country'))
+# #
+# # проверка статуса компании
+# print(adidas.status)
 #
-# проверка статуса компании
-print(adidas.status)
-
-# изменение статуса и проверка того, что он изменился
-adidas.change_status_to_inactive()
-print(adidas.status)
-adidas.is_company_active(adidas)
-candyshop.is_company_active(candyshop)
-
-# считаем возраст компании
-print(adidas.company_age())
-print(nike.company_age())
-
-# считаем средний месячный доход
-print(adidas.month_avg_income())
-print(nike.month_avg_income())
-
+# # изменение статуса и проверка того, что он изменился
+# adidas.change_status_to_inactive()
+# print(adidas.status)
+# adidas.is_company_active(adidas)
+# candyshop.is_company_active(candyshop)
 #
+# # считаем возраст компании
+# print(adidas.company_age())
+# print(nike.company_age())
 #
-class Employee:
-
-    year_salary_raise_value = 1.05
-
-    def __init__(self, name, surname, company, age, salary, job, year_of_start):
-        self.name = name
-        self.surname = surname
-        self.company = company
-        self.age = age
-        self.salary = salary
-        self.job = job
-        self.year_of_start = year_of_start
-
-    # распечатка инфо о сотруднике
-    def print_info(self):
-        print(f'{self.name} {self.surname}: company - {self.company}, age: {self.age}, salary: {self.salary}, job: {self.job}.')
-
-    # получить срок работы работника в компании
-    def get_experience_term(self):
-        now = date.today().year
-        return f'Employee {self.name} {self.surname} has {now - self.year_of_start} years of experience.'
-
-    def get_raised_salary(self):
-        raised_salary = round(self.salary * self.year_salary_raise_value)
-        return f'Salary increase is {raised_salary - self.salary} $.'
-
-    #
-    @classmethod
-    def change_raise_value(cls, new_value):
-        cls.year_salary_raise_value = new_value
-        return new_value
-
-    @staticmethod
-    # начало работы
-    def start_mark():
-        print('Start.')
+# # считаем средний месячный доход
+# print(adidas.month_avg_income())
+# print(nike.month_avg_income())
 #
+# #
+# #
+# class Employee:
 #
+#     year_salary_raise_value = 1.05
 #
-ann = Employee('Anna', 'Johnes', 'Adidas', 25, 3000, 'SMM', 2019)
-josh = Employee('Josh', 'Madsen', 'Nike', 35, 2000, 'Guardian', 2020)
-
-# печатаем инфо о сотруднике
-ann.print_info()
-
-# узнаем стаж сотрудника
-print(ann.get_experience_term())
-
-# узнаем насколько повысится зп через год при текущем коэффициенте повышения
-print(ann.get_raised_salary())
-
-# изменяем коэффициент повышения зп для класса и проверяем изменил ли он значение
-print(Employee.year_salary_raise_value)
-Employee.change_raise_value(1.1)
-print(Employee.year_salary_raise_value)
-# на экземпляре класса получаем новое значение повышения зп
-print(ann.get_raised_salary())
-
+#     def __init__(self, name, surname, company, age, salary, job, year_of_start):
+#         self.name = name
+#         self.surname = surname
+#         self.company = company
+#         self.age = age
+#         self.salary = salary
+#         self.job = job
+#         self.year_of_start = year_of_start
+#
+#     # распечатка инфо о сотруднике
+#     def print_info(self):
+#         print(f'{self.name} {self.surname}: company - {self.company}, age: {self.age}, salary: {self.salary}, job: {self.job}.')
+#
+#     # получить срок работы работника в компании
+#     def get_experience_term(self):
+#         now = date.today().year
+#         return f'Employee {self.name} {self.surname} has {now - self.year_of_start} years of experience.'
+#
+#     def get_raised_salary(self):
+#         raised_salary = round(self.salary * self.year_salary_raise_value)
+#         return f'Salary increase is {raised_salary - self.salary} $.'
+#
+#     #
+#     @classmethod
+#     def change_raise_value(cls, new_value):
+#         cls.year_salary_raise_value = new_value
+#         return new_value
+#
+#     @staticmethod
+#     # начало работы
+#     def start_mark():
+#         print('Start.')
+# #
+# #
+# #
+# ann = Employee('Anna', 'Johnes', 'Adidas', 25, 3000, 'SMM', 2019)
+# josh = Employee('Josh', 'Madsen', 'Nike', 35, 2000, 'Guardian', 2020)
+#
+# # печатаем инфо о сотруднике
+# ann.print_info()
+#
+# # узнаем стаж сотрудника
+# print(ann.get_experience_term())
+#
+# # узнаем насколько повысится зп через год при текущем коэффициенте повышения
+# print(ann.get_raised_salary())
+#
+# # изменяем коэффициент повышения зп для класса и проверяем изменил ли он значение
+# print(Employee.year_salary_raise_value)
+# Employee.change_raise_value(1.1)
+# print(Employee.year_salary_raise_value)
+# # на экземпляре класса получаем новое значение повышения зп
+# print(ann.get_raised_salary())
+#
