@@ -18,7 +18,7 @@ from datetime import date, datetime
 #
 class Company:
 
-    is_registered = True
+    number_of_companies = 0
 
     def __init__(self, name, year_income, employees_count, foundation_year, status):
         self.name = name
@@ -26,6 +26,7 @@ class Company:
         self.employees_count = employees_count
         self.foundation_year = foundation_year
         self.status = status
+        Company.number_of_companies += 1
 
     # считает возраст компании
     def company_age(self):
@@ -70,6 +71,11 @@ class Company:
     @classmethod
     def del_class_attr(cls, attr):
         delattr(cls, attr)
+
+    @classmethod
+    def get_number_of_companies(cls):
+        return cls.number_of_companies
+
     @staticmethod
     # проверяет статус компании
     def is_company_active(company):
@@ -124,7 +130,8 @@ print(nike.company_age())
 print(adidas.month_avg_income())
 print(nike.month_avg_income())
 
-#
+# считаем количество созданных компаний
+print(Company.get_number_of_companies())
 #
 class Employee:
 
