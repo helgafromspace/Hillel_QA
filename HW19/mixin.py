@@ -49,6 +49,8 @@ class AttributePrinterMixin:
             else:
                 result += f'    {i}: {attr[i]}\n'
         return f'{self.__class__.__name__}: {{\n{result}}}'
+
+
 class A(AttributePrinterMixin):
     def __init__(self):
         self.public_field = 3
