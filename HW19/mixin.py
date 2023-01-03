@@ -58,7 +58,10 @@ class A(AttributePrinterMixin):
         self.__private_field = [1, 2, 3]
 
 class B(A):
-    pass
+    def __init__(self) :
+        self.public_field = 5
+        self._protected_field = 'h'
+        self.__private_field = [1, 2, 3, 4, 5]
 
 a = A()
 print(a)
