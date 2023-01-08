@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+
 
 class Person:
     def __init__(self, name, surname, age):
@@ -8,7 +8,7 @@ class Person:
 
     def print_info(self):
         '''Method prints info about person'''
-        print(f'{self.name}\n{self.surname}\n{self.age}')
+        return f'Name: {self.name}\nsurname: {self.surname}\nage: {self.age}'
 
 
 class Subject:
@@ -39,13 +39,13 @@ class Teacher(Person):
 
     list_of_teachers = []
 
-    def __init__(self, name, surname, age, subject):
-        super().__init__(name, age, surname)
+    def __init__(self, name, surname, age, subject=[]):
+        super().__init__(name, surname, age)
         self.subject = subject
-        Teacher.list_of_teachers.append((name + ' ' + surname, [subject]))
+        Teacher.list_of_teachers.append(self)
 
     def print_info(self):
-        print(f'Name: {self.name}\nsurname: {self.surname}\nage: {self.age}\nsubject: {self.subject}')
+        print(f'{super().print_info()}\nsubject: {self.subject}')
 
     @classmethod
     def get_list_of_teachers(cls):
@@ -57,15 +57,15 @@ class Student(Person):
 
     list_of_students = []
 
-    def __init__(self, name, surname, age, grade, list_of_subjects=None, list_of_marks=None):
+    def __init__(self, name, surname, age, grade, list_of_subjects=[], list_of_marks={}):
         super().__init__(name, surname, age)
         self.grade = grade
         self.list_of_subjects = list_of_subjects
         self.list_of_marks = list_of_marks
-        Student.list_of_students.append((name, surname))
+        Student.list_of_students.append(self)
 
     def print_info(self):
-        print(f'Name: {self.name}\nsurname: {self.surname}\nage: {self.age}\ngrade: {self.grade}')
+        print(f'{super().print_info()}\ngrade: {self.grade}')
 
     def show_grade(self):
         '''Method to show grade of specific student'''
@@ -86,23 +86,17 @@ class Student(Person):
         '''Method allows to get list of subjects'''
         return self.list_of_subjects
 
+    def make_mark_list(self, subject, mark):
+        lst = self.get_list_of_subjects()
+        for i in lst :
+            if i == subject:
+                self.list_of_marks.setdefault (i, []).append (mark.name)
+            else :
+                self.list_of_marks.setdefault (i, [])
+
     def add_mark(self, subject, mark):
         '''Method to add marks for specific subject for a student'''
-        if self.list_of_marks is None:
-            self.list_of_marks = {}
-            lst = self.get_list_of_subjects()
-            for i in lst:
-                if i == subject:
-                    self.list_of_marks.setdefault(i, []).append(mark.name)
-                else:
-                    self.list_of_marks.setdefault(i, [])
-        else:
-            lst = self.get_list_of_subjects()
-            for i in lst:
-                if i == subject:
-                    self.list_of_marks.setdefault(i, []).append(mark.name)
-                else:
-                    self.list_of_marks.setdefault(i, [])
+        self.make_mark_list(subject, mark)
 
     def get_list_of_marks(self):
         '''Method to get list of marks'''
@@ -138,10 +132,7 @@ class Grade:
             print(f'{i.name} {i.surname}, {i.age}')
 
 
-class AbstractInfo(ABC):
 
-    @abstractmethod
-    def print_info(self, *args, **kwargs):
-        pass
+
 
 
