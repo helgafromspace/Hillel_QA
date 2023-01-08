@@ -46,9 +46,11 @@ class Timer:
     def __enter__(self):
         self.start = time.time()
         return self
+
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.stop = time.time()
         self.elapsed_time += round(self.stop - self.start)
+
     def reset(self):
         self.elapsed_time = 0
 
@@ -56,6 +58,7 @@ class Timer:
 with Timer() as t:
     time.sleep(1)
 print(t.elapsed_time)  # ~1 second
+
 with t:
     time.sleep(2)
 print(t.elapsed_time)  # ~3 seconds
@@ -63,7 +66,9 @@ print(t.elapsed_time)  # ~3 seconds
 with Timer() as t2:
     time.sleep(1)
 print(t2.elapsed_time)  # ~1 second
+
 t2.reset()
+
 with t2:
     time.sleep(2)
 print(t2.elapsed_time)  # ~2 seconds
