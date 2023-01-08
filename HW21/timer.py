@@ -38,8 +38,10 @@ import time
 # builtin_sleep = time.sleep()
 class Timer:
 
-    def __init__(self, elapsed_time=0):
+    def __init__(self, elapsed_time=0, start=0, stop=0):
         self.elapsed_time = elapsed_time
+        self.start = start
+        self.stop = stop
 
     def __enter__(self):
         self.start = time.time()
