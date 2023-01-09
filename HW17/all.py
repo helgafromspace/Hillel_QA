@@ -25,14 +25,14 @@ class Subject:
         return cls.list_of_subjects
 
 
-class Mark:
-    def __init__(self, name):
-        self.name = name
-
-A = Mark('A')
-B = Mark('B')
-C = Mark('C')
-D = Mark('D')
+# class Mark:
+#     def __init__(self, name):
+#         self.name = name
+#
+# A = Mark('A')
+# B = Mark('B')
+# C = Mark('C')
+# D = Mark('D')
 
 
 class Teacher(Person):
@@ -56,8 +56,9 @@ class Teacher(Person):
 class Student(Person):
 
     list_of_students = []
+    available_marks = ['A', 'B', 'C', 'D', 'E']
 
-    def __init__(self, name, surname, age, grade, list_of_subjects=[], list_of_marks={}):
+    def __init__(self, name, surname, age, grade, list_of_subjects=None, list_of_marks=None):
         super().__init__(name, surname, age)
         self.grade = grade
         self.list_of_subjects = list_of_subjects
@@ -86,27 +87,30 @@ class Student(Person):
         '''Method allows to get list of subjects'''
         return self.list_of_subjects
 
-    def make_mark_list(self, subject, mark):
+    def get_mark_list(self, subject, mark):
+        '''Method to get list of marks; simplifies add_mark function'''
         lst = self.get_list_of_subjects()
         for i in lst :
             if i == subject:
-                self.list_of_marks.setdefault (i, []).append (mark.name)
-            else :
+                self.list_of_marks.setdefault (i, []).append (mark)
+            else:
                 self.list_of_marks.setdefault (i, [])
 
     def add_mark(self, subject, mark):
         '''Method to add marks for specific subject for a student'''
-        self.make_mark_list(subject, mark)
-
+        if self.list_of_marks is None:
+            self.list_of_marks = {}
+            self.get_mark_list(subject, mark)
+        else:
+            self.get_mark_list(subject, mark)
     def get_list_of_marks(self):
         '''Method to get list of marks'''
-        return self.list_of_marks
+        print(f'Student: {self.name} {self.surname}\nGrade: {self.grade}\n{self.list_of_marks}')
 
     @classmethod
     def get_list_of_students(cls):
         '''Method to get list of all students'''
         return cls.list_of_students
-
 
 class Grade:
 
