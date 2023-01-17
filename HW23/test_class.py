@@ -50,20 +50,6 @@ def test_delete_all_items_in_order_from_three_to_one(structure_with_three_items)
     structure_with_three_items.delete(1)
     assert structure_with_three_items.length == 0
 
-@pytest.mark.xfail(reason = 'Script error: order of items deletion')
-def test_delete_all_items_in_order_from_one_to_three(structure_with_three_items):
-    structure_with_three_items.delete(1)
-    structure_with_three_items.delete(2)
-    structure_with_three_items.delete(3)
-    assert structure_with_three_items.length == 0
-
-@pytest.mark.xfail(reason = 'Script error: order of items deletion')
-def test_delete_all_items_in_random_order(structure_with_three_items):
-    structure_with_three_items.delete(2)
-    structure_with_three_items.delete(1)
-    structure_with_three_items.delete(3)
-    assert structure_with_three_items.length == 0
-
 @pytest.mark.parametrize('index',[0, 1, 2])
 def test_delete_item_with_index_out_of_range_causes_exception(index, default_structure):
     with pytest.raises(IndexError):
