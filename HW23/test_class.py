@@ -25,10 +25,6 @@ def test_values_of_added_items_are_correct(default_structure, add_three_items):
 def test_get_item_with_index_out_of_range_causes_exception(index, default_structure):
     with pytest.raises(IndexError) as ind:
         default_structure.get(index)
-def test_delete_item_if_length_equals_1(default_structure):
-    default_structure.add('one')
-    default_structure.delete(1)
-    assert default_structure.length == 0
 
 def test_delete_first_item_from_list_of_3_items(default_structure, add_three_items):
     default_structure.delete(1)
@@ -47,6 +43,25 @@ def test_delete_middle_item_from_list_of_3_items(default_structure, add_three_it
     assert default_structure.length == 2
     assert default_structure.get(1) == 'one'
     assert default_structure.get(2) == 'three'
+
+def test_delete_all_items_in_order_from_three_to_one(default_structure,add_three_items):
+    default_structure.delete(3)
+    default_structure.delete(2)
+    default_structure.delete(1)
+    assert default_structure.length == 0
+@pytest.mark.xfail(reason = 'Bug: order of items deletion')
+def test_delete_all_items_in_order_from_one_to_three(default_structure, add_three_items):
+    default_structure.delete(1)
+    default_structure.delete(2)
+    default_structure.delete(3)
+    assert default_structure.length == 0
+
+@pytest.mark.xfail(reason = 'Bug: order of items deletion')
+def test_delete_all_items_in_random_order(default_structure, add_three_items):
+    default_structure.delete(2)
+    default_structure.delete(1)
+    default_structure.delete(3)
+    assert default_structure.length == 0
 @pytest.mark.parametrize('index',[0, 1, 2])
 def test_delete_item_with_index_out_of_range_causes_exception(index, default_structure):
     with pytest.raises(IndexError) as ind:
