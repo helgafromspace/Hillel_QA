@@ -9,6 +9,7 @@ from HW23.structure_without_list import StructureWithoutList, Item
 def default_structure():
     structure = StructureWithoutList()
     return structure
+
 @pytest.fixture()
 def add_three_items(default_structure):
     default_structure.add('one')
