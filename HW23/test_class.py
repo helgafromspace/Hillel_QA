@@ -4,6 +4,7 @@ import pytest
 sys.path.append('/home/helga/Hillel_QA/')
 
 from HW23.structure_without_list import StructureWithoutList, Item
+
 def test_object_initial_length(default_structure):
     assert default_structure.length == 0
 
