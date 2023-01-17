@@ -11,7 +11,8 @@ def default_structure():
     return structure
 
 @pytest.fixture()
-def add_three_items(default_structure):
+def structure_with_three_items(default_structure):
     default_structure.add('one')
     default_structure.add('two')
     default_structure.add('three')
+    return default_structure
