@@ -10,9 +10,7 @@ from web_project.helpers.helpers import email_generator, login_generator, passwo
 
 path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
 
-def test_user_can_go_to_register_popup_from_main():
-    driver = Chrome(service=Service(path))
-    driver.maximize_window()
+def test_user_can_go_to_register_popup_from_main(driver):
     driver.get('https://hdrezka.ink/')
 
     register_button = driver.find_element(By.CSS_SELECTOR, 'a.b-tophead__register')
