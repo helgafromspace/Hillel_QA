@@ -43,9 +43,7 @@ def test_register_data_writer(*args):
     f.close()
 
 
-def create_registered_user():
-    driver = Chrome (service=Service (path))
-    driver.maximize_window ()
+def create_registered_user(driver):
     driver.get ('https://hdrezka.ag/')
 
     register_button = driver.find_element (By.CSS_SELECTOR, 'a.b-tophead__register')
