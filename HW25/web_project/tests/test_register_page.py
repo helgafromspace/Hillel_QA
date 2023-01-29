@@ -20,17 +20,17 @@ def test_user_can_go_to_register_popup_from_main(driver):
     assert register_popup.is_displayed()
 
     time.sleep(5)
-    driver.quit()
 
 
 def test_user_can_register_with_valid_data(driver):
-    driver.get ('https://hdrezka.ink/')
+    driver.get ('https://hdrezka.ag/')
 
     register_button = driver.find_element (By.CSS_SELECTOR, 'a.b-tophead__register')
     register_button.click ()
     wait = WebDriverWait (driver, 5)
     register_popup = wait.until (EC.visibility_of_element_located ((By.ID, 'register-popup')))
     assert register_popup.is_displayed ()
+    time.sleep(5)
 
     valid_register_email = email_generator()
     input_register_email = driver.find_element(By.ID, 'email')
@@ -55,8 +55,8 @@ def test_user_can_register_with_valid_data(driver):
     register_submit_button = driver.find_element(By.XPATH, "//button[@name='submit']")
     register_submit_button.submit()
 
-    login_button = driver.find_element(By.CSS_SELECTOR, 'a.b-tophead__login')
-    login_button.click()
+    profile_dropdown = wait.until (EC.visibility_of_element_located ((By.XPATH, "//span[@class='b-tophead-dropdown'] [text()='Профиль']")))
+    assert profile_dropdown.is_displayed()
 
 
 # def test_user_can_login_from_main_page(driver):
