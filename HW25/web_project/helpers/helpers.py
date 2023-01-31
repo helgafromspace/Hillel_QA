@@ -41,7 +41,7 @@ def test_register_data_writer(*args):
     for i in args:
         test_data += i +','
     test_data = test_data[:-1]
-    with open('register_page_data.py', 'a') as f:
+    with open('helpers/register_page_data.py', 'a') as f:
         f.writelines(test_data + '\n')
     f.close()
 
