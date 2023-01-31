@@ -1,9 +1,8 @@
-from selenium.webdriver import Chrome
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import pytest
 
 from web_project.helpers.helpers import email_generator, login_generator, password_generator, test_register_data_writer, \
     create_registered_user
@@ -11,7 +10,7 @@ from web_project.helpers.helpers import email_generator, login_generator, passwo
 path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
 
 def test_user_can_go_to_register_popup_from_main(driver):
-    driver.get('https://hdrezka.ink/')
+    driver.get('https://hdrezka.ag/')
 
     register_button = driver.find_element(By.CSS_SELECTOR, 'a.b-tophead__register')
     register_button.click()
@@ -19,18 +18,17 @@ def test_user_can_go_to_register_popup_from_main(driver):
     register_popup = wait.until(EC.visibility_of_element_located((By.ID, 'register-popup')))
     assert register_popup.is_displayed()
 
-    time.sleep(5)
 
-
+@pytest.mark.xfail(reason='Page doesn\'t refresh after entering credentials')
 def test_user_can_register_with_valid_data(driver):
     driver.get ('https://hdrezka.ag/')
 
     register_button = driver.find_element (By.CSS_SELECTOR, 'a.b-tophead__register')
     register_button.click ()
-    wait = WebDriverWait (driver, 5)
+    wait = WebDriverWait (driver, 8)
     register_popup = wait.until (EC.visibility_of_element_located ((By.ID, 'register-popup')))
     assert register_popup.is_displayed ()
-    time.sleep(5)
+    time.sleep(2)
 
     valid_register_email = email_generator()
     input_register_email = driver.find_element(By.ID, 'email')
@@ -55,31 +53,11 @@ def test_user_can_register_with_valid_data(driver):
     register_submit_button = driver.find_element(By.XPATH, "//button[@name='submit']")
     register_submit_button.submit()
 
+
+    # top_logo = driver.find_element(By.CSS_SELECTOR,'.b-tophead__logo')
+    # assert top_logo.is_displayed()
     profile_dropdown = wait.until (EC.visibility_of_element_located ((By.XPATH, "//span[@class='b-tophead-dropdown'] [text()='Профиль']")))
     assert profile_dropdown.is_displayed()
 
 
-# def test_user_can_login_from_main_page(driver):
-#     data = create_registered_user()
-#     valid_register_login, valid_register_password = data
-#     driver.get('https://hdrezka.ink/')
-#     wait = WebDriverWait (driver, 5)
-#     login_button = driver.find_element(By.CSS_SELECTOR, 'a.b-tophead__login')
-#     login_button.click()
-#
-#     login_popup = wait.until (EC.visibility_of_element_located ((By.ID, 'login-popup')))
-#     assert login_popup.is_displayed ()
-#
-#     input_login = driver.find_element (By.ID, 'login_name')
-#     input_login.send_keys(valid_register_login)
-#
-#     input_password_login = driver.find_element (By.ID, 'login_password')
-#     input_password_login.send_keys(valid_register_password)
-#
-#     login_button = driver.find_element(By.CSS_SELECTOR,'#login-popup button.login_button')
-#     login_button.click()
-#
-#     profile_dropdown = wait.until (EC.visibility_of_element_located ((By.XPATH, "//span[@class='b-tophead-dropdown'] [text()='Профиль']")))
-#     assert profile_dropdown.is_displayed()
-#
-#     time.sleep(10)
+

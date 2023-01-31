@@ -1,17 +1,20 @@
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import time
-
-from web_project.helpers.helpers import email_generator, login_generator, password_generator, test_register_data_writer
 import pytest
+
+from web_project.pages.login_page import LoginPage
+
 path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
 
 @pytest.fixture
 def driver():
     driver = Chrome(service=Service(path))
     driver.maximize_window()
+    driver.implicitly_wait(5)
     yield driver
     driver.quit()
+
+# @pytest.fixture
+# def get_login_page(self,driver):
+#     login_page = LoginPage (driver)
+#     return login_page
