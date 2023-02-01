@@ -15,6 +15,12 @@ surnames_list = ['doe', 'babyers', 'sriggs', 'johnsons', 'creeks', 'williamson',
                  'hilland']
 
 
+class User:
+    def __init__(self,login,password,email):
+        self.login = login
+        self.password = password
+        self.email = email
+
 def email_generator():
     domains_list = ['@yahoo.com', '@com.ua', '@com.de', '@gmail.com']
     seq = choice(names_list) + choice(surnames_list)
@@ -70,8 +76,7 @@ def create_registered_user(driver):
     register_submit_button.click()
 
     driver.delete_all_cookies()
-
     driver.refresh ()
 
 
-    return [valid_register_login, valid_register_password]
+    return [valid_register_login, valid_register_password,valid_register_email]
