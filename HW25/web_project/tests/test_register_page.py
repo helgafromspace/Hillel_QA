@@ -19,10 +19,12 @@ def test_user_can_go_to_register_popup_from_main(driver):
     assert register_popup.is_displayed()
 
 
-# @pytest.mark.xfail(reason='Page doesn\'t refresh after entering credentials')
+@pytest.mark.xfail(reason="Page doesn\'t refresh after entering credentials. User creds go to database but profile page"
+                          "can\'t be identified by locator')
 def test_user_can_register_with_valid_data(driver):
     driver.get ('https://hdrezka.ag/')
 
+    # holder = driver.find_element(By.CSS_SELECTOR,'#register-ajax-holder script')
     register_button = driver.find_element (By.CSS_SELECTOR, 'a.b-tophead__register')
     register_button.click ()
     wait = WebDriverWait (driver, 8)
@@ -52,16 +54,12 @@ def test_user_can_register_with_valid_data(driver):
     #
     # register_submit_button = driver.find_element(By.XPATH, "//button[@name='submit']")
     # register_submit_button.submit()
-
-    # holder = driver.find_element(By.CSS_SELECTOR,'#register-ajax-holder script')
     register_form.submit()
-
-
-    time.sleep(10)
+    time.sleep(5)
     top_logo = driver.find_element(By.CSS_SELECTOR,'.b-tophead__logo')
     assert top_logo.is_displayed()
-    # profile_dropdown = wait.until (EC.visibility_of_element_located ((By.XPATH, "//span[@class='b-tophead-dropdown'] [text()='Профиль']")))
-    # assert profile_dropdown.is_displayed()
+    profile_dropdown = wait.until (EC.visibility_of_element_located ((By.XPATH, "//span[@class='b-tophead-dropdown'] [text()='Профиль']")))
+    assert profile_dropdown.is_displayed()
 
 
 

@@ -7,12 +7,10 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
-names_list = ['olena', 'val', 'katie', 'daisy', 'sasha', 'alex', 'randy', 'arnold', 'steve', 'maryjane', 'lesly',
-              'michael', 'frazer',
-              'william', 'sam']
-surnames_list = ['doe', 'babyers', 'sriggs', 'johnsons', 'creeks', 'williamson', 'sanders', 'keene', 'queen', 'baggins',
-                 'smith',
-                 'hilland']
+names_list = ['susie', 'missy', 'cathrin', 'daisy', 'lenny', 'kenny', 'randy', 'alexander', 'stanley', 'maryjane', 'lassie',
+              'michelle', 'drazer','wendy', 'samuel','peter']
+surnames_list = ['doel', 'babyers', 'wisriggs', 'dajohnsons', 'reeks', 'williamson', 'thunders', 'kernel', 'queez', 'maggins',
+                 'smittens','harveson','davidson']
 
 
 class User:
@@ -47,7 +45,7 @@ def test_register_data_writer(*args):
     for i in args:
         test_data += i +','
     test_data = test_data[:-1]
-    with open('helpers/register_page_data.py', 'a') as f:
+    with open('web_project/helpers/register_page_data.py', 'a') as f:
         f.writelines(test_data + '\n')
     f.close()
 
@@ -79,4 +77,4 @@ def create_registered_user(driver):
     driver.refresh ()
 
 
-    return [valid_register_login, valid_register_password,valid_register_email]
+    return User(valid_register_login, valid_register_password,valid_register_email)
