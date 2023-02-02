@@ -3,56 +3,65 @@ from random import randint
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
 from web_project.helpers.helpers import create_registered_user
+from web_project.helpers.resources import Resources
 from web_project.pages.base_page import BasePage
 
 path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
 
 class LoginPage(BasePage):
 
+    LOGIN_LINK_LOCATOR = (By.CSS_SELECTOR, 'a.b-tophead__login')
+    LOGIN_POP_UP_LOCATOR = (By.ID, 'login-popup')
+    INPUT_LOGIN_LOCATOR = (By.ID, 'login_name')
+    INPUT_PASSWORD_LOCATOR = (By.ID, 'login_password')
+    LOGIN_BUTTON_LOCATOR = (By.CSS_SELECTOR,'#login-popup button.login_button')
+    PROFILE_DROPDOWN_LOCATOR = (By.XPATH, "//span[@class='b-tophead-dropdown'] [text()='Профиль']")
+    PROFILE_SETTINGS_LOCATOR = (By.CSS_SELECTOR,".b-tophead-dropdown li a[href*='settings']")
+    LOGIN_INVALID_CREDS_ERROR_LOCATOR = (By.XPATH, "//ul[@id='login-popup-errors']/li[contains(text(),'Введен неверный логин или пароль.')]")
+    PROFILE_HEADER_LOCATOR = (By.TAG_NAME,'h1')
+    PROFILE_EMAIL_FIELD_LOCATOR =(By.NAME, 'email')
+
+
     def __init__(self, driver: WebDriver, user_login=None, user_password=None, user_email=None):
-        self.driver = driver
+        super().__init__(driver)
         self.user_login = user_login
         self.user_password = user_password
         self.user_email = user_email
 
     @property
     def login_link(self):
-        return self.driver.find_element(By.CSS_SELECTOR, 'a.b-tophead__login')
+        return self.element_is_present(LoginPage.LOGIN_LINK_LOCATOR)
 
     @property
     def login_popup(self):
-        wait = WebDriverWait (self.driver, 5)
-        return wait.until (EC.visibility_of_element_located ((By.ID, 'login-popup')))
+        return self.element_is_present(LoginPage.LOGIN_POP_UP_LOCATOR)
 
     @property
     def input_login(self):
-        return self.driver.find_element (By.ID, 'login_name')
+        return self.element_is_present(LoginPage.INPUT_LOGIN_LOCATOR)
 
     @property
     def input_password_login(self):
-        return self.driver.find_element (By.ID, 'login_password')
+        return self.element_is_present(LoginPage.INPUT_PASSWORD_LOCATOR)
 
     @property
     def login_button(self):
-        return self.driver.find_element(By.CSS_SELECTOR,'#login-popup button.login_button')
+        return self.element_is_present(LoginPage.LOGIN_BUTTON_LOCATOR)
 
     @property
     def profile_dropdown(self):
-        return self.driver.find_element (By.XPATH, "//span[@class='b-tophead-dropdown'] [text()='Профиль']")
+        return self.element_is_present(LoginPage.PROFILE_DROPDOWN_LOCATOR)
+
 
     @property
     def profile_settings(self):
-        return self.driver.find_element (By.XPATH, "//span[@class='b-tophead-dropdown'] [text()='Профиль']/ul/li/a [text()='Настройки']")
+        return self.hidden_element_is_present(LoginPage.PROFILE_SETTINGS_LOCATOR)
 
     @property
     def login_invalid_creds_error(self):
-        wait = WebDriverWait (self.driver, 5)
-        return wait.until (
-            EC.visibility_of_element_located ((By.XPATH, "//ul[@id='login-popup-errors']/li[contains(text(),'Введен неверный логин или пароль.')]")))
+        return self.element_is_present (LoginPage.LOGIN_INVALID_CREDS_ERROR_LOCATOR)
 
     def navigate(self):
         self.driver.get('https://hdrezka.ag/')
@@ -113,19 +122,19 @@ class LoginPage(BasePage):
     def error_message_for_invalid_creds_is_displayed(self):
 
         assert self.login_invalid_creds_error.is_displayed ()
-        assert self.login_invalid_creds_error.text == 'Введен неверный логин или пароль.\nРекомендуем вместо логина вводить email.'
+        assert self.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
 
     def go_to_profile_page(self,driver):
         action = ActionChains(driver)
         action.move_to_element(self.profile_dropdown).move_to_element(self.profile_settings).click().perform()
-        h1 = self.driver.find_element(By.TAG_NAME,'h1')
+        h1 = self.element_is_present(LoginPage.PROFILE_HEADER_LOCATOR)
         assert h1.is_displayed()
         assert h1.text == 'Настройки профиля'
 
     def check_email_concordance(self):
-        ''' Check if user's email in profile email field is concordant to email user was registered with '''
+        ''' Check if user's email in profile email field is concordant to the email user was registered with '''
 
-        profile_email_field = self.driver.find_element(By.NAME, 'email')
+        profile_email_field = self.element_is_present(LoginPage.PROFILE_EMAIL_FIELD_LOCATOR)
         email_value = profile_email_field.get_attribute('value')
         assert email_value ==self.user_email

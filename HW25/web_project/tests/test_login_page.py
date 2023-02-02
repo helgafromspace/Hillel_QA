@@ -1,7 +1,3 @@
-
-from web_project.pages.login_page import LoginPage
-from web_project.conftest import User
-import time
 import pytest
 
 def test_user_can_login_from_main_page_with_valid_login_and_password(driver,login_page):

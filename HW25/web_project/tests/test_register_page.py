@@ -19,8 +19,7 @@ def test_user_can_go_to_register_popup_from_main(driver):
     assert register_popup.is_displayed()
 
 
-@pytest.mark.xfail(reason="Page doesn\'t refresh after entering credentials. User creds go to database but profile page"
-                          "can\'t be identified by locator')
+@pytest.mark.xfail(reason="Main page doesn\'t refresh after entering credentials but creds are in base though")
 def test_user_can_register_with_valid_data(driver):
     driver.get ('https://hdrezka.ag/')
 
