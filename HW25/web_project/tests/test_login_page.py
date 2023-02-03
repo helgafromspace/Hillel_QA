@@ -1,13 +1,13 @@
 import pytest
 
-def test_user_can_login_from_main_page_with_valid_login_and_password(driver,login_page):
-    login_page.perform_successful_login()
+def test_user_can_login_from_main_page_with_valid_login_and_password(driver,login_page, valid_user):
+    login_page.perform_successful_login(valid_user)
     login_page.go_to_profile_page(driver)
     login_page.check_email_concordance()
 
 
-def test_user_can_login_from_main_page_with_valid_email_and_password(driver,login_page):
-    login_page.perform_successful_login(email_flag=True)
+def test_user_can_login_from_main_page_with_valid_email_and_password(driver,login_page, valid_user):
+    login_page.perform_successful_login(valid_user,email_flag=True)
     login_page.go_to_profile_page(driver)
     login_page.check_email_concordance()
 
@@ -21,13 +21,13 @@ def test_user_cant_login_with_invalid_email(driver, login_page, invalid_user):
     login_page.error_message_for_invalid_creds_is_displayed ()
 
 
-def test_user_cant_login_with_correct_login_and_incorrect_password(driver, login_page):
-    login_page.perform_successful_login(change_password=True)
+def test_user_cant_login_with_correct_login_and_incorrect_password(driver, login_page, valid_user):
+    login_page.perform_successful_login(valid_user,change_password=True)
     login_page.error_message_for_invalid_creds_is_displayed ()
 
 
-def test_user_cant_login_with_incorrect_login_and_correct_password(driver, login_page):
-    login_page.perform_successful_login(change_login=True)
+def test_user_cant_login_with_incorrect_login_and_correct_password(driver, login_page,valid_user):
+    login_page.perform_successful_login(valid_user, change_login=True)
     login_page.error_message_for_invalid_creds_is_displayed ()
 
 

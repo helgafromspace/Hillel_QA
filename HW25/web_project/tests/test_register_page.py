@@ -4,8 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import pytest
 
-from web_project.helpers.helpers import email_generator, login_generator, password_generator, test_register_data_writer, \
-    create_registered_user
+from web_project.helpers.helpers import email_generator, login_generator, password_generator, test_register_data_writer
 
 path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
 
@@ -22,8 +21,6 @@ def test_user_can_go_to_register_popup_from_main(driver):
 @pytest.mark.xfail(reason="Main page doesn\'t refresh after entering credentials but creds are in base though")
 def test_user_can_register_with_valid_data(driver):
     driver.get ('https://hdrezka.ag/')
-
-    # holder = driver.find_element(By.CSS_SELECTOR,'#register-ajax-holder script')
     register_button = driver.find_element (By.CSS_SELECTOR, 'a.b-tophead__register')
     register_button.click ()
     wait = WebDriverWait (driver, 8)
@@ -54,7 +51,7 @@ def test_user_can_register_with_valid_data(driver):
     # register_submit_button = driver.find_element(By.XPATH, "//button[@name='submit']")
     # register_submit_button.submit()
     register_form.submit()
-    time.sleep(5)
+    time.sleep(3)
     top_logo = driver.find_element(By.CSS_SELECTOR,'.b-tophead__logo')
     assert top_logo.is_displayed()
     profile_dropdown = wait.until (EC.visibility_of_element_located ((By.XPATH, "//span[@class='b-tophead-dropdown'] [text()='Профиль']")))

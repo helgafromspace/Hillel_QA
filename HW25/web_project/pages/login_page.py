@@ -4,7 +4,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 import time
-from web_project.helpers.helpers import create_registered_user
+
 from web_project.helpers.resources import Resources
 from web_project.pages.base_page import BasePage
 
@@ -66,12 +66,11 @@ class LoginPage(BasePage):
     def navigate(self):
         self.driver.get('https://hdrezka.ag/')
 
-    def set_registered_credentials(self):
-        data = create_registered_user(self.driver)
-        self.user_login, self.user_password, self.user_email = data.login, data.password, data.email
+    def set_registered_credentials(self,valid_user):
+        self.user_login, self.user_password, self.user_email = valid_user.login, valid_user.password, valid_user.email
 
-    def get_registered_creds(self) :
-        self.set_registered_credentials ()
+    def get_registered_creds(self,valid_user) :
+        self.set_registered_credentials (valid_user)
         return self.user_login, self.user_password, self.user_email
 
     def enter_login(self,login):
@@ -83,8 +82,8 @@ class LoginPage(BasePage):
     def click_login_button(self):
         self.login_button.click()
 
-    def perform_successful_login(self,email_flag=False, change_password=False, change_login=False):
-        self.get_registered_creds ()
+    def perform_successful_login(self,valid_user,email_flag=False, change_password=False, change_login=False):
+        self.get_registered_creds (valid_user)
         if change_login:
             self.user_login = self.user_login + 2* chr(randint(65,90))
         if change_password:
