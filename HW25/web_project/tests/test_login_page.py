@@ -25,9 +25,12 @@ def test_user_cant_login_with_correct_login_and_incorrect_password(driver, login
     login_page.perform_successful_login(valid_user,change_password=True)
     login_page.error_message_for_invalid_creds_is_displayed ()
 
-
 def test_user_cant_login_with_incorrect_login_and_correct_password(driver, login_page,valid_user):
     login_page.perform_successful_login(valid_user, change_login=True)
     login_page.error_message_for_invalid_creds_is_displayed ()
+
+def test_user_can_logout_from_main_page(driver,login_page,valid_user):
+    login_page.perform_successful_login(valid_user)
+    login_page.perform_logout(driver)
 
 

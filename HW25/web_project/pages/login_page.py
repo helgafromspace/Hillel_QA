@@ -19,6 +19,7 @@ class LoginPage(BasePage):
     LOGIN_BUTTON_LOCATOR = (By.CSS_SELECTOR,'#login-popup button.login_button')
     PROFILE_DROPDOWN_LOCATOR = (By.XPATH, "//span[@class='b-tophead-dropdown'] [text()='Профиль']")
     PROFILE_SETTINGS_LOCATOR = (By.CSS_SELECTOR,".b-tophead-dropdown li a[href*='settings']")
+    LOGOUT_LINK_LOCATOR = (By.CSS_SELECTOR, ".b-tophead-dropdown li a[href*='logout']")
     LOGIN_INVALID_CREDS_ERROR_LOCATOR = (By.XPATH, "//ul[@id='login-popup-errors']/li[contains(text(),'Введен неверный логин или пароль.')]")
     PROFILE_HEADER_LOCATOR = (By.TAG_NAME,'h1')
     PROFILE_EMAIL_FIELD_LOCATOR =(By.NAME, 'email')
@@ -58,6 +59,10 @@ class LoginPage(BasePage):
     @property
     def profile_settings(self):
         return self.hidden_element_is_present(LoginPage.PROFILE_SETTINGS_LOCATOR)
+
+    @property
+    def logout_link(self):
+        return self.hidden_element_is_present (LoginPage.LOGOUT_LINK_LOCATOR)
 
     @property
     def login_invalid_creds_error(self):
@@ -137,3 +142,8 @@ class LoginPage(BasePage):
         profile_email_field = self.element_is_present(LoginPage.PROFILE_EMAIL_FIELD_LOCATOR)
         email_value = profile_email_field.get_attribute('value')
         assert email_value ==self.user_email
+
+    def perform_logout(self,driver):
+        action = ActionChains(driver)
+        action.move_to_element(self.profile_dropdown).move_to_element(self.logout_link).click().perform()
+        assert self.login_link.is_displayed()
