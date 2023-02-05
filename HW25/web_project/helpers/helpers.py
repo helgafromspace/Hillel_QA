@@ -2,11 +2,11 @@ from random import *
 
 import time
 
-path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
-names_list = ['susie', 'missy', 'cathrin', 'daisy', 'lenny', 'kenny', 'randy', 'alexander', 'stanley', 'maryjane', 'lassie',
-              'michelle', 'drazer','wendy', 'samuel','peter']
-surnames_list = ['doel', 'babyers', 'wisriggs', 'dajohnsons', 'reeks', 'williamson', 'thunders', 'kernel', 'queez', 'maggins',
-                 'smittens','harveson','davidson']
+# path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
+names_list = ['susan', 'mandy', 'catarina', 'daisysmile', 'lenie', 'ken', 'sole', 'oleksandr', 'ranley', 'jan', 'lascel',
+              'sersey', 'joffrey','sansa', 'sheldon','pete']
+surnames_list = ['doels', 'babers', 'teriggs', 'monsons', 'seeks', 'stark', 'thunderson', 'cullen', 'lanister', 'jaggins',
+                 'smithens','harelson','kavidson']
 
 
 class User:
@@ -45,32 +45,3 @@ def test_register_data_writer(*args):
         f.writelines(test_data + '\n')
     f.close()
 
-
-# def create_registered_user(driver):
-#     driver.get ('https://hdrezka.ag/')
-#
-#     register_button = driver.find_element (By.CSS_SELECTOR, 'a.b-tophead__register')
-#     register_button.click ()
-#     wait = WebDriverWait (driver, 5)
-#
-#     register_popup = wait.until (EC.visibility_of_element_located ((By.ID, 'register-popup')))
-#
-#     valid_register_email = email_generator()
-#     input_register_email = driver.find_element(By.ID, 'email')
-#     input_register_email.send_keys(valid_register_email)
-#     valid_register_login = login_generator()
-#     input_register_login = driver.find_element (By.ID, 'name')
-#     input_register_login.send_keys(valid_register_login)
-#
-#     valid_register_password = password_generator()
-#     input_register_password = driver.find_element (By.ID, 'password1')
-#     input_register_password.send_keys(valid_register_password)
-#
-#     register_submit_button = driver.find_element(By.XPATH, "//button[@name='submit']")
-#     register_submit_button.click()
-#
-#     driver.delete_all_cookies()
-#     driver.refresh ()
-#
-#
-#     return User(valid_register_login, valid_register_password,valid_register_email)

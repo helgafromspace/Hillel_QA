@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 import time
 
+from web_project.helpers.helper_config import get_base_url
 from web_project.helpers.resources import Resources
 from web_project.pages.base_page import BasePage
 
@@ -69,7 +70,7 @@ class LoginPage(BasePage):
         return self.element_is_present (LoginPage.LOGIN_INVALID_CREDS_ERROR_LOCATOR)
 
     def navigate(self):
-        self.driver.get('https://hdrezka.ag/')
+        self.driver.get(get_base_url())
 
     def set_registered_credentials(self,valid_user):
         self.user_login, self.user_password, self.user_email = valid_user.login, valid_user.password, valid_user.email

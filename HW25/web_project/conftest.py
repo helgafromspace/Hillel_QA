@@ -2,17 +2,35 @@
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service
 import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from webdriver_manager.firefox import GeckoDriverManager
+from web_project.helpers.browsers import Browser
+from web_project.helpers.custom_exceptions import UnsupportedBrowserException
+from web_project.helpers.helper_config import get_browser_name
 from web_project.helpers.helpers import User
 from web_project.pages.login_page import LoginPage
 from web_project.pages.register_page import RegisterPage
 
-path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
+
+
+@pytest.fixture(scope="session")
+def browser_name():
+    return get_browser_name()
 
 @pytest.fixture
-def driver():
-    driver = Chrome(service=Service(path))
-    driver.maximize_window()
-    driver.implicitly_wait(5)
+def driver(browser_name):
+    if browser_name.lower() == Browser.CHROME:
+        path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
+        driver = Chrome(service=Service(path))
+        # driver = webdriver.Chrome (service=ChromeService (ChromeDriverManager ().install ()))
+        driver.maximize_window()
+    elif browser_name.lower() == Browser.FIREFOX:
+        driver = webdriver.Firefox (service=FirefoxService (GeckoDriverManager ().install ()))
+    else:
+        raise UnsupportedBrowserException(browser_name)
     yield driver
     driver.quit()
 

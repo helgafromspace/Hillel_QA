@@ -12,8 +12,8 @@ path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
 def test_user_can_go_to_register_popup_from_main_page(driver, register_page):
     register_page.open_register_form()
 
-def test_register_popup_has_required_elements_for_registration(driver, register_page):
-    register_page.register_form_has_required_elements()
+def test_register_popup_has_required_fields_for_registration(driver, register_page):
+    register_page.register_form_has_required_fields()
 
 def test_user_can_register_with_valid_data(driver,register_page):
     register_page.perform_successfull_registration()
@@ -35,6 +35,8 @@ def test_user_cant_register_with_invalid_password(driver,register_page,password_
 
 def test_user_cant_register_with_blank_fields(driver,register_page):
     register_page.perform_unsuccessfull_registration_with_empty_credentials_fields()
+
+
 
 
 

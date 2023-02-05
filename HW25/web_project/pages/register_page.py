@@ -1,11 +1,12 @@
 
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
+
+from web_project.helpers.helper_config import get_base_url
 from web_project.helpers.helpers import email_generator, login_generator, password_generator, User, \
     test_register_data_writer
 from web_project.helpers.resources import Resources
 from web_project.pages.base_page import BasePage
-
-from selenium.webdriver.remote.webdriver import WebDriver
 
 import time
 
@@ -114,14 +115,15 @@ class RegisterPage(BasePage):
         return self.element_is_present (RegisterPage.PASSWORD_LABEL_LOCATOR)
 
     def navigate(self):
-        self.driver.get('https://hdrezka.ag/')
+        self.driver.get(get_base_url())
 
     def open_register_form(self):
         self.register_link.click()
         assert self.register_form.is_displayed()
 
-    def register_form_has_required_elements(self):
+    def register_form_has_required_fields(self):
         self.open_register_form()
+
         assert self.input_register_email.is_displayed()
         assert self.email_label.is_displayed()
         assert self.email_label.text == Resources.RegisterPage.EMAIL_LABEL_TEXT
