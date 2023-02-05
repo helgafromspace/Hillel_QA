@@ -23,9 +23,9 @@ def browser_name():
 @pytest.fixture
 def driver(browser_name):
     if browser_name.lower() == Browser.CHROME:
-        path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
-        driver = Chrome(service=Service(path))
-        # driver = webdriver.Chrome (service=ChromeService (ChromeDriverManager ().install ()))
+        # path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
+        # driver = Chrome(service=Service(path))
+        driver = webdriver.Chrome (service=ChromeService (ChromeDriverManager ().install ()))
         driver.maximize_window()
     elif browser_name.lower() == Browser.FIREFOX:
         driver = webdriver.Firefox (service=FirefoxService (GeckoDriverManager ().install ()))
