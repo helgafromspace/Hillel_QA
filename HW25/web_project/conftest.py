@@ -1,14 +1,8 @@
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-
-from web_project.helpers.helpers import login_generator, User, email_generator, password_generator
+from web_project.helpers.helpers import User
 from web_project.pages.login_page import LoginPage
 from web_project.pages.register_page import RegisterPage
 
@@ -37,7 +31,7 @@ def register_page(driver):
 
 @pytest.fixture(scope = 'session')
 def invalid_user():
-    return User('WTO','123465464','dhjshdks.gmail.com')
+    return User('WT','12346','dhjshdks.gmail.com')
 
 
 
