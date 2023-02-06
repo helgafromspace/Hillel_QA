@@ -127,4 +127,3 @@ class LoginPage(BasePage):
     def perform_logout(self):
         action = ActionChains(self.driver)
         action.move_to_element(self.profile_dropdown).move_to_element(self.logout_link).click().perform()
-        assert self.login_link.is_displayed()
