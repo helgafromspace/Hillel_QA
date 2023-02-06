@@ -2,10 +2,9 @@ class Resources:
 
     class LoginPage:
         INCORRECT_CREDS_ERROR_MESSAGE = 'Введен неверный логин или пароль.\nРекомендуем вместо логина вводить email.'
+        PROFILE_PAGE_HEADER_TEXT = 'Настройки профиля'
 
     class RegisterPage:
-        EMAIL_VALIDITY_MESSAGE = 'Можно использовать данный email для регистрации'
-        LOGIN_VALIDITY_MESSAGE = 'Можно использовать данный логин для регистрации'
         EMAIL_INVALIDITY_MESSAGE = 'Введен неверный email адрес'
         LOGIN_INVALIDITY_MESSAGE = 'Логин не может быть менее 3 символов и более 30 символов'
         PASSWORD_INVALIDITY_MESSAGE = 'Длина пароля должна быть не менее 6 символов'

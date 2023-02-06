@@ -1,6 +1,4 @@
 
-from selenium.webdriver import Chrome
-from selenium.webdriver.chrome.service import Service
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -10,7 +8,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from web_project.helpers.browsers import Browser
 from web_project.helpers.custom_exceptions import UnsupportedBrowserException
 from web_project.helpers.helper_config import get_browser_name
-from web_project.helpers.helpers import User
+from web_project.helpers.user import User
 from web_project.pages.login_page import LoginPage
 from web_project.pages.register_page import RegisterPage
 
@@ -48,16 +46,12 @@ def register_page(driver):
 
 
 @pytest.fixture(scope = 'session')
-def invalid_user():
+def unregistered_user():
     return User('WT','12346','dhjshdks.gmail.com')
 
 
 
 @pytest.fixture()
-def valid_user(driver,register_page):
-    valid_user = register_page.perform_successfull_registration()
-    # following steps are performed due to page refresh problems after automatic user registration
-    driver.delete_all_cookies()
-    driver.refresh ()
-    return valid_user
+def valid_user():
+    return User('SarahDrasner','123456789','sarahdrasner@gmail.com')
 

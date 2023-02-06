@@ -11,7 +11,7 @@ class BasePage:
     def element_is_present(self,locator,timeout=5):
         return WebDriverWait (self.driver, timeout=timeout).until(EC.visibility_of_element_located(locator))
 
-    def hidden_element_is_present(self,locator,timeout=5):
+    def hidden_element_is_present(self,locator,timeout=10):
         return WebDriverWait (self.driver, timeout=timeout).until(EC.presence_of_element_located(locator))
 
     def is_element_not_displayed(self, locator, timeout=5) :
