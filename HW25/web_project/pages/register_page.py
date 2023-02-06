@@ -1,9 +1,14 @@
-
-from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.webdriver.common.by import By
-from web_project.helpers.helper_config import get_base_url
-from web_project.pages.base_page import BasePage
 import time
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from web_project.helpers.helper_config import get_base_url
+from web_project.helpers.resources import Resources
+from web_project.pages.base_page import BasePage
+
 
 class RegisterPage(BasePage):
 
@@ -15,6 +20,7 @@ class RegisterPage(BasePage):
     SUBMIT_BUTTON_LOCATOR = (By.XPATH, "//button[@name='submit']")
     EMAIL_INVALIDITY_CHECKER_LOCATOR = (By.CSS_SELECTOR, '#result-registration-email span.string-error')
     LOGIN_INVALIDITY_CHECKER_LOCATOR = (By.CSS_SELECTOR, '#result-registration-login span.string-error')
+    REGISTER_ERROR_LIST = (By.ID, 'register-popup-errors')
     PASSWORD_INVALIDITY_CHECKER_LOCATOR = (By.CSS_SELECTOR,'#register-popup-errors ul li:nth-child(3)')
     EMPTY_NAME_ERROR_LOCATOR = (By.CSS_SELECTOR,'#register-popup-errors ul li:first-child')
     LOGIN_FIELD_ERROR_LOCATOR = (By.CSS_SELECTOR, '#register-popup-errors ul li:nth-child(2)')
@@ -31,27 +37,27 @@ class RegisterPage(BasePage):
 
     @property
     def register_link(self):
-        return self.element_is_present (RegisterPage.REGISTER_LINK_LOCATOR)
+        return self.element_is_present(RegisterPage.REGISTER_LINK_LOCATOR)
 
     @property
     def register_form(self):
-        return self.element_is_present (RegisterPage.REGISTER_FORM_LOCATOR)
+        return self.element_is_present(RegisterPage.REGISTER_FORM_LOCATOR)
 
     @property
     def input_register_email(self):
-        return self.element_is_present (RegisterPage.INPUT_REGISTER_EMAIL_LOCATOR)
+        return self.element_is_present(RegisterPage.INPUT_REGISTER_EMAIL_LOCATOR)
 
     @property
     def input_register_login(self):
-        return self.element_is_present (RegisterPage.INPUT_REGISTER_LOGIN_LOCATOR)
+        return self.element_is_present(RegisterPage.INPUT_REGISTER_LOGIN_LOCATOR)
 
     @property
     def input_register_password(self):
-        return self.element_is_present (RegisterPage.INPUT_REGISTER_PASSWORD)
+        return self.element_is_present(RegisterPage.INPUT_REGISTER_PASSWORD)
 
     @property
     def submit_button(self):
-        return self.element_is_present (RegisterPage.SUBMIT_BUTTON_LOCATOR)
+        return self.element_is_present(RegisterPage.SUBMIT_BUTTON_LOCATOR)
 
     @property
     def email_invalidity_checker(self):
@@ -59,42 +65,42 @@ class RegisterPage(BasePage):
 
     @property
     def login_invalidity_checker(self):
-        return self.element_is_present (RegisterPage.LOGIN_INVALIDITY_CHECKER_LOCATOR)
+        return self.element_is_present(RegisterPage.LOGIN_INVALIDITY_CHECKER_LOCATOR)
 
     @property
     def password_invalidity_checker(self):
-        return self.element_is_present (RegisterPage.PASSWORD_INVALIDITY_CHECKER_LOCATOR)
+        return self.element_is_present(RegisterPage.PASSWORD_INVALIDITY_CHECKER_LOCATOR)
 
     @property
     def empty_name_error(self):
-        return self.element_is_present (RegisterPage.EMPTY_NAME_ERROR_LOCATOR)
+        return self.element_is_present(RegisterPage.EMPTY_NAME_ERROR_LOCATOR)
 
     @property
     def login_field_error(self):
-        return self.element_is_present (RegisterPage.LOGIN_FIELD_ERROR_LOCATOR)
+        return self.element_is_present(RegisterPage.LOGIN_FIELD_ERROR_LOCATOR)
 
     @property
     def email_field_error(self):
-        return self.element_is_present (RegisterPage.EMAIL_FIELD_ERROR_LOCATOR)
+        return self.element_is_present(RegisterPage.EMAIL_FIELD_ERROR_LOCATOR)
 
     @property
     def email_field_notification(self):
-        return self.element_is_present (RegisterPage.EMAIL_FIELD_NOTIFICATION_LOCATOR)
+        return self.element_is_present(RegisterPage.EMAIL_FIELD_NOTIFICATION_LOCATOR)
 
     @property
     def login_field_notification(self):
-        return self.element_is_present (RegisterPage.LOGIN_FIELD_NOTIFICATION_LOCATOR)
+        return self.element_is_present(RegisterPage.LOGIN_FIELD_NOTIFICATION_LOCATOR)
     @property
     def email_label(self):
-        return self.element_is_present (RegisterPage.EMAIL_LABEL_LOCATOR)
+        return self.element_is_present(RegisterPage.EMAIL_LABEL_LOCATOR)
 
     @property
     def login_label(self):
-        return self.element_is_present (RegisterPage.LOGIN_LABEL_LOCATOR)
+        return self.element_is_present(RegisterPage.LOGIN_LABEL_LOCATOR)
 
     @property
     def password_label(self):
-        return self.element_is_present (RegisterPage.PASSWORD_LABEL_LOCATOR)
+        return self.element_is_present(RegisterPage.PASSWORD_LABEL_LOCATOR)
 
     def navigate(self):
         self.driver.get(get_base_url())
@@ -108,18 +114,20 @@ class RegisterPage(BasePage):
 
     def enter_invalid_email(self,invalid_register_email):
         self.input_register_email.send_keys(invalid_register_email)
-        time.sleep(5)
+        WebDriverWait(self.driver, 5).until(
+            lambda wd: wd.find_element(*RegisterPage.EMAIL_INVALIDITY_CHECKER_LOCATOR).text == Resources.RegisterPage.EMAIL_INVALIDITY_MESSAGE)
         self.click_submit_button()
 
 
     def enter_invalid_login(self,invalid_register_login):
         self.input_register_login.send_keys(invalid_register_login)
-        time.sleep(5)
+        WebDriverWait(self.driver, 5).until(
+            lambda wd: wd.find_element(*RegisterPage.LOGIN_INVALIDITY_CHECKER_LOCATOR).text == Resources.RegisterPage.LOGIN_INVALIDITY_MESSAGE)
         self.click_submit_button()
 
     def enter_invalid_password(self,invalid_register_password):
         self.input_register_password.send_keys(invalid_register_password)
-        time.sleep(5)
+        # time.sleep(5)  # No wait is needed here - app doesn't changed
         self.click_submit_button()
 
 
@@ -129,15 +137,5 @@ class RegisterPage(BasePage):
     def perform_unsuccessfull_registration_with_empty_credentials_fields(self):
         self.open_register_form()
         self.click_submit_button()
-        time.sleep(3)
-
-
-
-
-
-
-
-
-
-
+        WebDriverWait(self.driver, 5).until(EC.visibility_of_all_elements_located(RegisterPage.REGISTER_ERROR_LIST))
 
