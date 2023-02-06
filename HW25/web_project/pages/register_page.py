@@ -26,11 +26,8 @@ class RegisterPage(BasePage):
     PASSWORD_LABEL_LOCATOR = (By.CSS_SELECTOR, "label[for='password1']")
 
 
-    def __init__(self, driver: WebDriver, user_login=None, user_password=None, user_email=None):
+    def __init__(self, driver: WebDriver):
         super().__init__(driver)
-        self.user_login = user_login
-        self.user_password = user_password
-        self.user_email = user_email
 
     @property
     def register_link(self):

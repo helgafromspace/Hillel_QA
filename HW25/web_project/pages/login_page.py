@@ -23,11 +23,8 @@ class LoginPage(BasePage):
     PROFILE_EMAIL_FIELD_LOCATOR =(By.NAME, 'email')
 
 
-    def __init__(self, driver: WebDriver, user_login=None, user_password=None, user_email=None):
+    def __init__(self, driver: WebDriver):
         super().__init__(driver)
-        self.user_login = user_login
-        self.user_password = user_password
-        self.user_email = user_email
 
     @property
     def login_link(self):
@@ -72,10 +69,6 @@ class LoginPage(BasePage):
 
     def navigate(self):
         self.driver.get(get_base_url())
-
-    def set_registered_credentials(self,valid_user):
-        self.user_login, self.user_password, self.user_email = valid_user.login, valid_user.password, valid_user.email
-        return self.user_login, self.user_password, self.user_email
 
     def enter_login(self,login):
         return self.input_login.send_keys(login)
