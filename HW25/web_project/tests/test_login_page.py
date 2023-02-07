@@ -5,7 +5,7 @@ def test_user_can_login_from_main_page_with_valid_login_and_password(driver,logi
     login_page.login_link.click ()
     assert login_page.login_popup.is_displayed()
     login_page.enter_login(valid_user.login)
-    login_page.enter_password(valid_user.password)
+    login_page.enter_password (valid_user.password)
     login_page.click_login_button()
     login_page.go_to_profile_page()
     assert login_page.profile_page_header.is_displayed()
@@ -22,25 +22,25 @@ def test_user_can_login_from_main_page_with_valid_email_and_password(driver,logi
 
 
 def test_user_cant_login_with_unregistered_login(driver, login_page, unregistered_user):
-    login_page.perform_unsuccessful_login(unregistered_user)
+    login_page.perform_unsuccessful_login_with_unregistered_user(unregistered_user)
     assert login_page.login_popup.is_displayed()
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
 def test_user_cant_login_with_unregistered_email(driver, login_page, unregistered_user):
-    login_page.perform_unsuccessful_login(unregistered_user)
+    login_page.perform_unsuccessful_login_with_unregistered_user(unregistered_user,email_flag=True)
     assert login_page.login_popup.is_displayed()
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
 
-def test_user_cant_login_with_correct_login_and_incorrect_password(driver, login_page, valid_user):
-    login_page.perform_successful_login(valid_user,change_password=True)  # Why here successful login used if we enter incorrect login?
+def test_user_cant_login_with_correct_login_and_incorrect_password(driver, login_page, valid_user,unregistered_user):
+    login_page.perform_unsuccessful_login_with_registered_user(valid_user,unregistered_user,change_password=True)
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
-def test_user_cant_login_with_incorrect_login_and_correct_password(driver, login_page,valid_user):
-    login_page.perform_successful_login(valid_user, change_login=True)  # Why here successful login used if we enter incorrect login?
+def test_user_cant_login_with_incorrect_login_and_correct_password(driver, login_page,valid_user,unregistered_user):
+    login_page.perform_unsuccessful_login_with_registered_user(valid_user, unregistered_user, change_login=True)
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 

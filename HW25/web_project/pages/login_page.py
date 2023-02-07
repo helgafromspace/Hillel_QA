@@ -20,6 +20,7 @@ class LoginPage(BasePage):
     INPUT_LOGIN_LOCATOR = (By.ID, 'login_name')
     INPUT_PASSWORD_LOCATOR = (By.ID, 'login_password')
     LOGIN_BUTTON_LOCATOR = (By.CSS_SELECTOR,'#login-popup button.login_button')
+    DROPDOWN_MENU_LOCATOR = (By.XPATH, "//span[@class='b-tophead-dropdown']")
     PROFILE_DROPDOWN_LOCATOR = (By.XPATH, "//span[@class='b-tophead-dropdown'] [text()='Профиль']")
     PROFILE_SETTINGS_LOCATOR = (By.CSS_SELECTOR,".b-tophead-dropdown li a[href*='settings']")
     LOGOUT_LINK_LOCATOR = (By.CSS_SELECTOR, ".b-tophead-dropdown li a[href*='logout']")
@@ -71,6 +72,9 @@ class LoginPage(BasePage):
     @property
     def profile_page_header(self):
         return self.element_is_present(LoginPage.PROFILE_HEADER_LOCATOR)
+    @property
+    def dropdown_menu(self):
+        return self.element_is_present (LoginPage.DROPDOWN_MENU_LOCATOR)
 
     def navigate(self):
         self.driver.get(get_base_url())
@@ -84,12 +88,10 @@ class LoginPage(BasePage):
     def click_login_button(self):
         self.login_button.click()
 
-    def perform_successful_login(self,valid_user,email_flag=False, change_password=False, change_login=False):
-        if change_login:
-            valid_user.login += 2 * chr(randint(65,90))
-        if change_password:
-            valid_user.password += chr(randint(65,90))
+    def wait_for_all_elements_to_be_visible(self):
+        return self.elements_are_present(LoginPage.DROPDOWN_MENU_LOCATOR)
 
+    def perform_successful_login(self,valid_user,email_flag=False):
         self.login_link.click()
 
         if email_flag:
@@ -98,15 +100,26 @@ class LoginPage(BasePage):
             self.enter_login (valid_user.login)
 
         self.enter_password (valid_user.password)
-
         self.click_login_button()
-
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_all_elements_located((By.XPATH, "//span[@class='b-tophead-dropdown']")))
-
+        self.wait_for_all_elements_to_be_visible()
         return self
 
 
-    def perform_unsuccessful_login(self, user,email_flag=False):
+    def perform_unsuccessful_login_with_registered_user(self, valid_user, invalid_user,change_login=False,change_password=False):
+        self.login_link.click()
+        if change_login:
+            self.enter_login(invalid_user.login)
+        else:
+            self.enter_login (valid_user.login)
+        if change_password:
+            self.enter_password(invalid_user.password)
+        else:
+            self.enter_password (valid_user.password)
+
+        self.click_login_button()
+        return self
+
+    def perform_unsuccessful_login_with_unregistered_user(self, user, email_flag=False) :
         self.login_link.click()
         if email_flag:
             self.enter_login(user.email)
