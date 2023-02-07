@@ -35,12 +35,12 @@ def test_user_cant_login_with_unregistered_email(driver, login_page, unregistere
 
 
 def test_user_cant_login_with_correct_login_and_incorrect_password(driver, login_page, valid_user):
-    login_page.perform_successful_login(valid_user,change_password=True)
+    login_page.perform_successful_login(valid_user,change_password=True)  # Why here successful login used if we enter incorrect login?
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
 def test_user_cant_login_with_incorrect_login_and_correct_password(driver, login_page,valid_user):
-    login_page.perform_successful_login(valid_user, change_login=True)
+    login_page.perform_successful_login(valid_user, change_login=True)  # Why here successful login used if we enter incorrect login?
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 

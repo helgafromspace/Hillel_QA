@@ -1,10 +1,15 @@
 from random import randint
+import time
+
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-import time
-from web_project.helpers.helper_config import get_base_url
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from web_project.pages.base_page import BasePage
+from web_project.helpers.helper_config import get_base_url
+
 
 path = '/home/helga/Hillel_QA/drivers/chromedriver/chromedriver'
 
@@ -81,7 +86,7 @@ class LoginPage(BasePage):
 
     def perform_successful_login(self,valid_user,email_flag=False, change_password=False, change_login=False):
         if change_login:
-            valid_user.login += 2* chr(randint(65,90))
+            valid_user.login += 2 * chr(randint(65,90))
         if change_password:
             valid_user.password += chr(randint(65,90))
 
@@ -95,7 +100,8 @@ class LoginPage(BasePage):
         self.enter_password (valid_user.password)
 
         self.click_login_button()
-        time.sleep(5)
+
+        WebDriverWait(self.driver, 5).until(EC.visibility_of_all_elements_located((By.XPATH, "//span[@class='b-tophead-dropdown']")))
 
         return self
 
@@ -108,7 +114,6 @@ class LoginPage(BasePage):
             self.enter_login(user.login)
         self.enter_password (user.password)
         self.click_login_button()
-        time.sleep (2)
         return self
 
 
@@ -119,10 +124,10 @@ class LoginPage(BasePage):
 
     def get_profile_email_field(self):
         ''' Check if user's email in profile email field is concordant to the email user was registered with '''
-
         profile_email_field = self.element_is_present(LoginPage.PROFILE_EMAIL_FIELD_LOCATOR)
         email_value = profile_email_field.get_attribute('value')
         return email_value
+
 
     def perform_logout(self):
         action = ActionChains(self.driver)
