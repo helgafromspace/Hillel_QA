@@ -105,12 +105,18 @@ class LoginPage(BasePage):
         return self
 
 
-    def perform_unsuccessful_login_with_registered_user(self, valid_user, invalid_user,change_login=False,change_password=False):
+    def perform_unsuccessful_login_with_registered_user(self, valid_user, invalid_user,change_login=False,change_password=False,change_email=False, email_flag=False):
         self.login_link.click()
         if change_login:
             self.enter_login(invalid_user.login)
+        elif change_login and email_flag:
+            self.enter_login (invalid_user.email)
         else:
-            self.enter_login (valid_user.login)
+            self.enter_login(valid_user.login)
+        if change_email:
+            self.enter_login(invalid_user.email)
+        else:
+            self.enter_login(valid_user.email)
         if change_password:
             self.enter_password(invalid_user.password)
         else:

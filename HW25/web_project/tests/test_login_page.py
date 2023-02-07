@@ -33,7 +33,6 @@ def test_user_cant_login_with_unregistered_email(driver, login_page, unregistere
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
-
 def test_user_cant_login_with_correct_login_and_incorrect_password(driver, login_page, valid_user,unregistered_user):
     login_page.perform_unsuccessful_login_with_registered_user(valid_user,unregistered_user,change_password=True)
     assert login_page.login_invalid_creds_error.is_displayed()
@@ -43,6 +42,17 @@ def test_user_cant_login_with_incorrect_login_and_correct_password(driver, login
     login_page.perform_unsuccessful_login_with_registered_user(valid_user, unregistered_user, change_login=True)
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
+
+def test_user_cant_login_with_correct_email_and_incorrect_password(driver, login_page, valid_user,unregistered_user):
+    login_page.perform_unsuccessful_login_with_registered_user(valid_user,unregistered_user,change_password=True,email_flag=True)
+    assert login_page.login_invalid_creds_error.is_displayed()
+    assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
+
+def test_user_cant_login_with_incorrect_email_and_correct_password(driver, login_page, valid_user,unregistered_user):
+    login_page.perform_unsuccessful_login_with_registered_user(valid_user,unregistered_user,change_email=True,email_flag=True)
+    assert login_page.login_invalid_creds_error.is_displayed()
+    assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
+
 
 def test_user_can_logout_from_main_page(driver,login_page,valid_user):
     login_page.perform_successful_login(valid_user)
