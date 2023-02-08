@@ -127,7 +127,6 @@ class RegisterPage(BasePage):
 
     def enter_invalid_password(self,invalid_register_password):
         self.input_register_password.send_keys(invalid_register_password)
-        # time.sleep(5)  # No wait is needed here - app doesn't changed
         self.click_submit_button()
 
 

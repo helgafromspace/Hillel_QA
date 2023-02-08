@@ -88,44 +88,20 @@ class LoginPage(BasePage):
     def click_login_button(self):
         self.login_button.click()
 
-    def wait_for_all_elements_to_be_visible(self):
-        return self.elements_are_present(LoginPage.DROPDOWN_MENU_LOCATOR)
 
-    def perform_successful_login(self,valid_user,email_flag=False):
+    def perform_successful_login(self,user,email_flag=False):
         self.login_link.click()
 
         if email_flag:
-            self.enter_login (valid_user.email)
+            self.enter_login(user.email)
         else:
-            self.enter_login (valid_user.login)
+            self.enter_login(user.login)
 
-        self.enter_password (valid_user.password)
-        self.click_login_button()
-        self.wait_for_all_elements_to_be_visible()
-        return self
-
-
-    def perform_unsuccessful_login_with_registered_user(self, valid_user, invalid_user,change_login=False,change_password=False,change_email=False, email_flag=False):
-        self.login_link.click()
-        if change_login:
-            self.enter_login(invalid_user.login)
-        elif change_login and email_flag:
-            self.enter_login (invalid_user.email)
-        else:
-            self.enter_login(valid_user.login)
-        if change_email:
-            self.enter_login(invalid_user.email)
-        else:
-            self.enter_login(valid_user.email)
-        if change_password:
-            self.enter_password(invalid_user.password)
-        else:
-            self.enter_password (valid_user.password)
-
+        self.enter_password(user.password)
         self.click_login_button()
         return self
 
-    def perform_unsuccessful_login_with_unregistered_user(self, user, email_flag=False) :
+    def perform_unsuccessful_login(self, user, email_flag=False) :
         self.login_link.click()
         if email_flag:
             self.enter_login(user.email)

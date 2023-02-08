@@ -1,4 +1,5 @@
 from web_project.helpers.resources import Resources
+from web_project.helpers.user import User
 
 
 def test_user_can_login_from_main_page_with_valid_login_and_password(driver,login_page, valid_user):
@@ -22,34 +23,38 @@ def test_user_can_login_from_main_page_with_valid_email_and_password(driver,logi
 
 
 def test_user_cant_login_with_unregistered_login(driver, login_page, unregistered_user):
-    login_page.perform_unsuccessful_login_with_unregistered_user(unregistered_user)
+    login_page.perform_unsuccessful_login(unregistered_user)
     assert login_page.login_popup.is_displayed()
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
 def test_user_cant_login_with_unregistered_email(driver, login_page, unregistered_user):
-    login_page.perform_unsuccessful_login_with_unregistered_user(unregistered_user,email_flag=True)
+    login_page.perform_unsuccessful_login(unregistered_user,email_flag=True)
     assert login_page.login_popup.is_displayed()
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
 def test_user_cant_login_with_correct_login_and_incorrect_password(driver, login_page, valid_user,unregistered_user):
-    login_page.perform_unsuccessful_login_with_registered_user(valid_user,unregistered_user,change_password=True)
+    test_user = User(valid_user.login,unregistered_user.password,valid_user.email)
+    login_page.perform_unsuccessful_login(test_user)
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
 def test_user_cant_login_with_incorrect_login_and_correct_password(driver, login_page,valid_user,unregistered_user):
-    login_page.perform_unsuccessful_login_with_registered_user(valid_user, unregistered_user, change_login=True)
+    test_user = User (unregistered_user.login, valid_user.password, valid_user.email)
+    login_page.perform_unsuccessful_login(test_user)
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
 def test_user_cant_login_with_correct_email_and_incorrect_password(driver, login_page, valid_user,unregistered_user):
-    login_page.perform_unsuccessful_login_with_registered_user(valid_user,unregistered_user,change_password=True,email_flag=True)
+    test_user = User (valid_user.login, unregistered_user.password, valid_user.email)
+    login_page.perform_unsuccessful_login(test_user,email_flag=True)
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
 def test_user_cant_login_with_incorrect_email_and_correct_password(driver, login_page, valid_user,unregistered_user):
-    login_page.perform_unsuccessful_login_with_registered_user(valid_user,unregistered_user,change_email=True,email_flag=True)
+    test_user = User (valid_user.login, unregistered_user.password, unregistered_user.email)
+    login_page.perform_unsuccessful_login(test_user,email_flag=True)
     assert login_page.login_invalid_creds_error.is_displayed()
     assert login_page.login_invalid_creds_error.text == Resources.LoginPage.INCORRECT_CREDS_ERROR_MESSAGE
 
