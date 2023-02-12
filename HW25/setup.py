@@ -6,6 +6,7 @@ setup(name='HL Web Project',
       packages=['web_project'],
       install_requires=['pytest',
                         'selenium',
-                        'webdriver-manager'
+                        'webdriver-manager',
+                        'allure-pytest'
                         ]
       )
