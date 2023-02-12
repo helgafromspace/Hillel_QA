@@ -97,25 +97,13 @@ class LoginPage(BasePage):
     def click_login_link(self):
         self.login_link.click()
 
-    def perform_successful_login(self,user,email_flag=False):
+    def perform_login(self,user,email_flag=False):
         self.click_login_link()
-
         if email_flag:
             self.enter_login(user.email)
         else:
             self.enter_login(user.login)
-
         self.enter_password(user.password)
-        self.click_login_button()
-        return self
-
-    def perform_unsuccessful_login(self, user, email_flag=False) :
-        self.click_login_link()
-        if email_flag:
-            self.enter_login(user.email)
-        else:
-            self.enter_login(user.login)
-        self.enter_password (user.password)
         self.click_login_button()
         return self
 
