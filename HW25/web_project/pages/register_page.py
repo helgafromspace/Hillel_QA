@@ -105,7 +105,7 @@ class RegisterPage(BasePage):
     def navigate(self):
         self.driver.get(get_base_url())
 
-    @allure.step ('Click on register_link and open the register form')
+    @allure.step ('Click on register_link to open the register form')
     def open_register_form(self):
         self.register_link.click()
 

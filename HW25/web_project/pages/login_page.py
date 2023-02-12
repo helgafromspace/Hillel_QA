@@ -124,7 +124,7 @@ class LoginPage(BasePage):
         action = ActionChains(self.driver)
         action.move_to_element(self.profile_dropdown).move_to_element(self.profile_settings).click().perform()
 
-    @allure.step ('Check if email in profile field is same that was used for login')
+    @allure.step ('Get email in profile field')
     def get_profile_email_field(self):
         ''' Check if user's email in profile email field is concordant to the email user was registered with '''
         profile_email_field = self.element_is_present(LoginPage.PROFILE_EMAIL_FIELD_LOCATOR)
