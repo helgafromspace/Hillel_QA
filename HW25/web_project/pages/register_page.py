@@ -1,5 +1,4 @@
-import time
-
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
@@ -102,39 +101,59 @@ class RegisterPage(BasePage):
     def password_label(self):
         return self.element_is_present(RegisterPage.PASSWORD_LABEL_LOCATOR)
 
+    @allure.step ('Go to main page')
     def navigate(self):
         self.driver.get(get_base_url())
 
+    @allure.step ('Click on register_link and open the register form')
     def open_register_form(self):
         self.register_link.click()
 
+    @allure.step ('Check if register form has required fields')
     def register_form_has_required_fields(self):
         self.open_register_form()
 
-
-    def enter_invalid_email(self,invalid_register_email):
-        self.input_register_email.send_keys(invalid_register_email)
+    @allure.step ('Enter invalid email {register_email}')
+    def enter_invalid_email(self,register_email):
+        self.input_register_email.send_keys(register_email)
         WebDriverWait(self.driver, 5).until(
             lambda wd: wd.find_element(*RegisterPage.EMAIL_INVALIDITY_CHECKER_LOCATOR).text == Resources.RegisterPage.EMAIL_INVALIDITY_MESSAGE)
-        self.click_submit_button()
 
-
-    def enter_invalid_login(self,invalid_register_login):
-        self.input_register_login.send_keys(invalid_register_login)
+    @allure.step ('Enter invalid login {register_login}')
+    def enter_invalid_login(self,register_login):
+        self.input_register_login.send_keys(register_login)
         WebDriverWait(self.driver, 5).until(
             lambda wd: wd.find_element(*RegisterPage.LOGIN_INVALIDITY_CHECKER_LOCATOR).text == Resources.RegisterPage.LOGIN_INVALIDITY_MESSAGE)
-        self.click_submit_button()
 
-    def enter_invalid_password(self,invalid_register_password):
-        self.input_register_password.send_keys(invalid_register_password)
-        self.click_submit_button()
+    @allure.step ('Enter invalid password {register_password}')
+    def enter_invalid_password(self,register_password):
+        self.input_register_password.send_keys(register_password)
 
-
+    @allure.step ('Click on submit button')
     def click_submit_button(self):
         self.submit_button.click()
+
+    @allure.step('Enter register email {email}')
+    def enter_register_email(self,email):
+        self.input_register_email.send_keys(email)
+
+    @allure.step('Enter register login {login}')
+    def enter_register_login(self,login):
+        self.input_register_login.send_keys(login)
+
+    @allure.step('Enter register password {password}')
+    def enter_register_password(self,password):
+        self.input_register_password.send_keys(password)
+    def perform_successful_registration(self,user):
+        self.enter_register_email(user.email)
+        self.enter_register_login(user.login)
+        self.enter_register_password(user.password)
+        self.click_submit_button()
 
     def perform_unsuccessfull_registration_with_empty_credentials_fields(self):
         self.open_register_form()
         self.click_submit_button()
         WebDriverWait(self.driver, 5).until(EC.visibility_of_all_elements_located(RegisterPage.REGISTER_ERROR_LIST))
+
+
 

@@ -1,11 +1,16 @@
+import allure
 import pytest
 from web_project.helpers.resources import Resources
 
 
+@allure.feature('Registration')
+@allure.story('Successful register')
 def test_user_can_go_to_register_popup_from_main_page(driver, register_page):
     register_page.open_register_form()
-    assert register_page.register_form.is_displayed ()
+    assert register_page.register_form.is_displayed()
 
+@allure.feature('Registration')
+@allure.story('Successful register')
 def test_register_popup_has_required_fields_for_registration(driver, register_page):
     register_page.register_form_has_required_fields()
     assert register_page.input_register_email.is_displayed ()
@@ -27,27 +32,38 @@ def test_register_popup_has_required_fields_for_registration(driver, register_pa
     assert register_page.submit_button.is_displayed ()
     assert register_page.submit_button.text == Resources.RegisterPage.SUBMIT_BUTTON_TEXT
 
+@allure.feature('Registration')
+@allure.story('Unsuccessful register')
 @pytest.mark.parametrize('email_param',['ahjhsajshj.gmail.com', ' ', 'gmail.com'])
 def test_user_cant_register_with_invalid_email(driver,register_page,email_param):
     register_page.open_register_form()
     register_page.enter_invalid_email(email_param)
+    register_page.click_submit_button()
     assert register_page.email_invalidity_checker.is_displayed ()
     assert register_page.email_invalidity_checker.text == Resources.RegisterPage.EMAIL_INVALIDITY_MESSAGE
 
+@allure.feature('Registration')
+@allure.story('Unsuccessful register')
 @pytest.mark.parametrize('login_param',['E', 'df', 'login_with_more_than_30_letters'])
 def test_user_cant_register_with_invalid_login(driver,register_page,login_param):
     register_page.open_register_form()
     register_page.enter_invalid_login(login_param)
+    register_page.click_submit_button ()
     assert register_page.login_invalidity_checker.is_displayed ()
     assert register_page.login_invalidity_checker.text == Resources.RegisterPage.LOGIN_INVALIDITY_MESSAGE
 
+@allure.feature('Registration')
+@allure.story('Unsuccessful register')
 @pytest.mark.parametrize('password_param',['1', '5'])
 def test_user_cant_register_with_invalid_password(driver,register_page,password_param):
     register_page.open_register_form()
     register_page.enter_invalid_password(password_param)
+    register_page.click_submit_button ()
     assert register_page.password_invalidity_checker.is_displayed ()
     assert register_page.password_invalidity_checker.text == Resources.RegisterPage.PASSWORD_INVALIDITY_MESSAGE
 
+@allure.feature('Registration')
+@allure.story('Unsuccessful register')
 def test_user_cant_register_with_blank_fields(driver,register_page):
     register_page.perform_unsuccessfull_registration_with_empty_credentials_fields()
     assert register_page.empty_name_error.is_displayed ()
@@ -60,7 +76,13 @@ def test_user_cant_register_with_blank_fields(driver,register_page):
     assert register_page.email_field_error.text == Resources.RegisterPage.EMAIL_INVALIDITY_MESSAGE
 
 
-
+@allure.feature('Registration')
+@allure.story('Successful register')
+# @pytest.mark.xfail(reason='Assertion fail for report')
+def test_user_can_register_with_valid_login_and_password(driver, register_page, login_page,register_user):
+    register_page.open_register_form()
+    register_page.perform_successful_registration(register_user)
+    assert register_page.email_field_error.text == Resources.RegisterPage.LOGIN_FIELD_ERROR
 
 
 
