@@ -25,19 +25,19 @@ root = tree.getroot()
 json_dict = {}
 
 for element in root:
-    key = list(element.attrib.keys())[0]
-    json_dict[element.attrib[key]] = {}
-    keys = {}
-    keys2 = {}
+    page_name_key = list(element.attrib.keys())[0]
+    json_dict[element.attrib[page_name_key]] = {}
+    keys_el_name = {}
+    keys_locators = {}
     for el1 in element:
-        key1 = list (el1.attrib.keys())[0]
-        keys.update({el1.attrib[key1]: {}})
-        json_dict[element.attrib[key]] = keys
+        el_name = list (el1.attrib.keys())[0]
+        keys_el_name.update({el1.attrib[el_name]: {}})
+        json_dict[element.attrib[page_name_key ]] = keys_el_name
         for el2 in el1:
-            key2 = list (el2.attrib.keys ())[0]
-            key3 = list (el2.attrib.keys ())[1]
-            keys2.update ({el2.attrib[key2] : []})
-            json_dict[element.attrib[key]][el1.attrib[key1]][el2.attrib[key2]] = [el2.attrib[key3],el2.text]
+            platform = list (el2.attrib.keys ())[0]
+            locator_type = list (el2.attrib.keys ())[1]
+            keys_locators.update ({el2.attrib[platform] : []})
+            json_dict[element.attrib[page_name_key]][el1.attrib[el_name]][el2.attrib[platform]] = [el2.attrib[locator_type],el2.text]
 
 
 
