@@ -10,12 +10,13 @@ from pprint import pprint
 
 import requests
 
+from .helpers.headers import CreateUserHeaders
 from .helpers.helper_config import get_create_user_url
 from .helpers.status_codes import StatusCodes
 
-headers = {"Accept" : "application/json",
-           "Content-Type" : "application/json",
-           "Authorization" : "Bearer 853ca9386e4300ab03a1828e8cd7b76f99070f2321d18ff9ac70dc279ec6c863"}
+# headers = {"Accept" : "application/json",
+#            "Content-Type" : "application/json",
+#            "Authorization" : "Bearer 853ca9386e4300ab03a1828e8cd7b76f99070f2321d18ff9ac70dc279ec6c863"}
 
 # def test_create_user(api_user,create_user):
 #     assert create_user.json()["name"] == api_user["name"]
@@ -31,14 +32,14 @@ def test_create_post_and_delete_user(api_user,create_user):
         'title': 'First post',
         'body': 'Hello world!'
     }
-    create_post = requests.post(f'{url}/{req_user_id}/posts', json=data, headers=headers)
+    create_post = requests.post(f'{url}/{req_user_id}/posts', json=data, headers=CreateUserHeaders.headers)
 
     print(create_post.json())
     res_user_id = create_post.json()['user_id']
     res_user_title = create_post.json()['title']
     res_user_body = create_post.json()['body']
 
-    get_user_posts = requests.get(f'{url}/{req_user_id}/posts', headers=headers)
+    get_user_posts = requests.get(f'{url}/{req_user_id}/posts', headers=CreateUserHeaders.headers)
 
     print(get_user_posts.json())
     assert res_user_id == req_user_id
@@ -46,15 +47,15 @@ def test_create_post_and_delete_user(api_user,create_user):
     assert res_user_body == data['body']
     assert get_user_posts.status_code == StatusCodes.OK.value
 
-    user_info = requests.get (f'{url}/{req_user_id}', headers=headers)
+    user_info = requests.get (f'{url}/{req_user_id}', headers=CreateUserHeaders.headers)
     print(user_info.json())
 
-    requests.delete(f'{url}/{req_user_id}', headers=headers)
+    requests.delete(f'{url}/{req_user_id}', headers=CreateUserHeaders.headers)
 
-    response_posts_after_del = requests.get(f'{url}/{req_user_id}/posts', headers=headers)
+    get_user_posts_after_del = requests.get(f'{url}/{req_user_id}/posts', headers=CreateUserHeaders.headers)
 
-    user_info = requests.get(f'{url}/{req_user_id}', headers=headers)
+    user_info = requests.get(f'{url}/{req_user_id}', headers=CreateUserHeaders.headers)
 
     assert user_info.status_code == StatusCodes.NOT_FOUND.value
     assert user_info.json()['message'] == 'Resource not found'
-    assert not response_posts_after_del.json()
+    assert not get_user_posts_after_del.json()
