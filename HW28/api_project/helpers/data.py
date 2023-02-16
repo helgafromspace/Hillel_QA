@@ -7,7 +7,7 @@ class CreatePostData(Data):
         'body': 'Hello world!',
     }
 
-    empty_data = {
+    invalid_empty_data = {
         'title': '',
         'body': '',
     }
@@ -17,4 +17,9 @@ class CreatePostData(Data):
         'body': 'Hello world 2!',
     }
 
+    invalid_data_excessive_field = {
+        'title': 'Third post',
+        'name': 'James',
+        'body': 'Hello world 3',
+    }
 

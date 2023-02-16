@@ -36,7 +36,7 @@ def test_create_post(create_user):
 def test_create_post_with_empty_data(create_user):
     req_user_id = create_user.json()["id"]
     url = get_create_user_url()
-    created_post = create_post(req_user_id, CreatePostData.empty_data)
+    created_post = create_post(req_user_id, CreatePostData.invalid_empty_data)
 
     assert created_post.status_code == StatusCodes.UNPROCESSABLE_ENTITY.value
     assert len(created_post.json()) == 2
@@ -79,7 +79,7 @@ def test_create_2_posts(create_user):
 
 
 # def test_get_info_after_del(create_user):
-#     req_user_id = 408971
+#     req_user_id = 423477
 #     url = get_create_user_url()
 #     get_user_posts_after_del = requests.get(f'{url}/{req_user_id}/posts', headers=CreateUserHeaders.headers)
 #     user_info = requests.get (f'{url}/{req_user_id}', headers=CreateUserHeaders.headers)
