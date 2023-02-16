@@ -1,3 +1,8 @@
+import requests
+
+from api_project.helpers.headers import CreateUserHeaders
+from api_project.helpers.helper_config import get_create_user_url
+
 
 class UserApi:
     def __init__(self,name,gender,email,status,user_id = None):

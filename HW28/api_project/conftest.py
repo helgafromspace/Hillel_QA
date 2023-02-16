@@ -10,7 +10,7 @@ from .helpers.user import UserApi
 
 @pytest.fixture()
 def api_user():
-    return UserApi (login_generator (), gender_generator (), email_generator (), status_generator()).json_constructor()
+    return UserApi(login_generator (), gender_generator (), email_generator (), status_generator()).json_constructor()
 
 @pytest.fixture()
 def create_user(api_user):
@@ -19,6 +19,8 @@ def create_user(api_user):
     req_user_id = response.json()["id"]
     yield response
     requests.delete(f'{url}/{req_user_id}', headers=CreateUserHeaders.headers)
+
+
 
 
 
