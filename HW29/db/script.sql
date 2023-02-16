@@ -11,3 +11,7 @@
 -- который он может себе позволить (цена автомобиля должна быть меньше или равна дохода человека).Отсортировать по имени чловека в алфавитном порядке.
 
 select Persons.name, Cars.model,Cars.color,Cars.price, Persons.profit from Persons JOIN Cars ON Persons.favourite_color = Cars.color where price <= profit GROUP BY name HAVING MIN(price) ORDER BY name ASC;
+
+--6.Вывести для каждого человека...
+
+select Persons.name, IIF( Cars.price > profit,NULL,Cars.model) AS model,Cars.color,IIF(Cars.price > profit,NULL,Cars.price) AS price, Persons.profit from Persons JOIN Cars ON Persons.favourite_color = Cars.color GROUP BY name ORDER BY name ASC;
