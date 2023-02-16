@@ -1,7 +1,5 @@
-class Data:
-    pass
 
-class CreatePostData(Data):
+class CreatePostData:
     valid_data_1_post = {
         'title': 'First post',
         'body': 'Hello world!',
