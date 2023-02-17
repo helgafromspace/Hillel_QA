@@ -17,4 +17,6 @@ select Persons.name, Cars.model,Cars.color,Cars.price, Persons.profit from Perso
 
 -- Отсортировать по имени чловека в алфавитном порядке.
 
-select Persons.name, IIF( Cars.price > profit,NULL,Cars.model) AS model,Cars.color,IIF(Cars.price > profit,NULL,Cars.price) AS price, Persons.profit from Persons JOIN Cars ON Persons.favourite_color = Cars.color GROUP BY name ORDER BY name ASC;
+select Persons.name, IIF( Cars.price > profit,NULL,Cars.model) AS model,Cars.color,IIF(Cars.price > profit,NULL,Cars.price) AS price, Persons.profit from Persons JOIN Cars ON Persons.favourite_color = Cars.color GROUP BY name HAVING MIN(price) ORDER BY name ASC;
+
+select Persons2.name, IIF( Cars2.price > profit,NULL,Cars2.model) AS model,Cars2.color,IIF(Cars2.price > profit,NULL,Cars2.price) AS price, Persons2.profit from Persons2 JOIN Cars2 ON Persons2.favourite_color = Cars2.color GROUP BY name HAVING MIN(price) ORDER BY name ASC;
