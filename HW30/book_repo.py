@@ -1,7 +1,6 @@
 import sqlite3
 
 from base_repo import BaseRepository
-from helper_config import get_db_path
 
 
 class Book:
@@ -32,7 +31,7 @@ class BookRepository(BaseRepository):
 book_repository = BookRepository()
 print(book_repository.get_all_books())
 
-book1 = Book(1,'1984','George Orwell', 1949)
+book1 = Book(1,'1984','George Orwell',1949)
 print(book1)
 book_repository.add_book(book1)
 print(book_repository.get_all_books())
