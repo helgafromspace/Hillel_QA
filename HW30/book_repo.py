@@ -29,7 +29,10 @@ class BookRepository(BaseRepository):
         for book in books:
             self._cursor.execute ("INSERT INTO Book VALUES(?,?,?,?);", (book.book_id,book.title,book.author,book.publish_year))
 
-    def select_all_books_of_specific_publish_year(self,year):
+    def update_publish_year(self,new_year:int,old_year:int,title):
+        self._cursor.execute ("UPDATE Book SET publish_year = ? where publish_year = ? and title = ?;", (new_year,old_year,title))
+
+    def select_all_books_of_specific_publish_year(self,year:int):
         self._cursor.execute ("select title,author,publish_year from Book where publish_year = ?;",[year])
         data = self._cursor.fetchall()
         return data
@@ -38,22 +41,29 @@ class BookRepository(BaseRepository):
         self._cursor.execute ("select title,author,publish_year from Book where author = ?;",[author])
         data = self._cursor.fetchall()
         return data
-"""select title,author,publish_year from Book where author='George Orwell';"""
+
+
+    def delete_all_books_of_specific_author(self,author):
+        self._cursor.execute ("delete from Book where author = ?;",[author])
 
 
 book_repository = BookRepository()
-# print(book_repository.get_all_books())
-#
-# book1 = Book(1,'1984','George Orwell',1949)
-# book2 = Book(2,'The Laws','PLato',1979)
-# book3 = Book(3,'A Brief History Of Time','Steven Hawking',2020)
-# book4 = Book(4,'The Republic','PLato',2020)
-# book5 = Book(5,'Animal Farm','George Orwell',2020)
-#
-# book_repository.add_book(book1)
-# print(book_repository.get_all_books())
-# book_repository.add_book(book2,book3, book4, book5)
-# print(book_repository.get_all_books())
+print(book_repository.get_all_books())
+
+book1 = Book(1,'1984','George Orwell',1949)
+book2 = Book(2,'The Laws','Plato',1979)
+book3 = Book(3,'A Brief History Of Time','Steven Hawking',2020)
+book4 = Book(4,'The Republic','Plato',2020)
+book5 = Book(5,'Animal Farm','George Orwell',2020)
+
+book_repository.add_book(book1)
+print(book_repository.get_all_books())
+book_repository.add_book(book2,book3, book4, book5)
+print(book_repository.get_all_books())
 
 print(book_repository.select_all_books_of_specific_publish_year(2020))
 print(book_repository.select_all_books_of_specific_author('George Orwell'))
+book_repository.update_publish_year(1950,1949,'1984')
+print(book_repository.get_all_books())
+book_repository.delete_all_books_of_specific_author('Plato')
+print(book_repository.get_all_books())
