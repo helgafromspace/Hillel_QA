@@ -37,6 +37,5 @@ print(book1)
 book_repository.add_book(book1)
 print(book_repository.get_all_books())
 # print(book_repository.get_all_books())
-# print(book_repository.get_all_books())
 
 
