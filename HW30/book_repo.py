@@ -1,4 +1,5 @@
 import sqlite3
+from ctypes import Union
 
 from base_repo import BaseRepository
 
@@ -29,7 +30,7 @@ class BookRepository(BaseRepository):
         for book in books:
             self._cursor.execute ("INSERT INTO Book VALUES(?,?,?,?);", (book.book_id,book.title,book.author,book.publish_year))
 
-    def update_publish_year(self,new_year:int,old_year:int,title):
+    def update_publish_year(self,new_year:int,old_year:int, title):
         self._cursor.execute ("UPDATE Book SET publish_year = ? where publish_year = ? and title = ?;", (new_year,old_year,title))
 
     def select_all_books_of_specific_publish_year(self,year:int):
@@ -42,13 +43,14 @@ class BookRepository(BaseRepository):
         data = self._cursor.fetchall()
         return data
 
-
     def delete_all_books_of_specific_author(self,author):
-        self._cursor.execute ("delete from Book where author = ?;",[author])
+        self._cursor.execute ("delete from Book where author = ?;", [author])
+
 
 
 book_repository = BookRepository()
 print(book_repository.get_all_books())
+
 
 book1 = Book(1,'1984','George Orwell',1949)
 book2 = Book(2,'The Laws','Plato',1979)
@@ -67,3 +69,4 @@ book_repository.update_publish_year(1950,1949,'1984')
 print(book_repository.get_all_books())
 book_repository.delete_all_books_of_specific_author('Plato')
 print(book_repository.get_all_books())
+
