@@ -8,7 +8,7 @@ class Book:
     def __init__(self, book_id, title, author:str, publish_year):
         self.book_id = book_id
         self.title = title
-        self.author = author,
+        self.author = author
         self.publish_year = publish_year
 
     def __repr__(self):
@@ -26,7 +26,7 @@ class BookRepository(BaseRepository):
         return data
 
     def add_book(self, book:Book):
-        self._cursor.execute ("INSERT INTO Book VALUES(?,?,?,?);", (book.book_id,book.title,book.author[0],book.publish_year))
+        self._cursor.execute ("INSERT INTO Book VALUES(?,?,?,?);", (book.book_id,book.title,book.author,book.publish_year))
 
 book_repository = BookRepository()
 print(book_repository.get_all_books())
