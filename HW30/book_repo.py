@@ -18,7 +18,7 @@ class BookRepository(BaseRepository):
 
     def __init__(self):
         super().__init__()
-        self._cursor.execute('CREATE TABLE IF NOT EXISTS Book(book_id INTEGER PRIMARY KEY, title TEXT, author TEXT, publish_year INTEGER);')
+        self._cursor.execute('CREATE TABLE IF NOT EXISTS Book(book_id INTEGER UNIQUE PRIMARY KEY, title TEXT, author TEXT, publish_year INTEGER);')
 
     def get_all_books(self):
         self._cursor.execute('select * from Book;')
@@ -29,16 +29,31 @@ class BookRepository(BaseRepository):
         for book in books:
             self._cursor.execute ("INSERT INTO Book VALUES(?,?,?,?);", (book.book_id,book.title,book.author,book.publish_year))
 
+    def select_all_books_of_specific_publish_year(self,year):
+        self._cursor.execute ("select title,author,publish_year from Book where publish_year = ?;",[year])
+        data = self._cursor.fetchall()
+        return data
+
+    def select_all_books_of_specific_author(self,author):
+        self._cursor.execute ("select title,author,publish_year from Book where author = ?;",[author])
+        data = self._cursor.fetchall()
+        return data
+"""select title,author,publish_year from Book where author='George Orwell';"""
+
 
 book_repository = BookRepository()
-print(book_repository.get_all_books())
+# print(book_repository.get_all_books())
+#
+# book1 = Book(1,'1984','George Orwell',1949)
+# book2 = Book(2,'The Laws','PLato',1979)
+# book3 = Book(3,'A Brief History Of Time','Steven Hawking',2020)
+# book4 = Book(4,'The Republic','PLato',2020)
+# book5 = Book(5,'Animal Farm','George Orwell',2020)
+#
+# book_repository.add_book(book1)
+# print(book_repository.get_all_books())
+# book_repository.add_book(book2,book3, book4, book5)
+# print(book_repository.get_all_books())
 
-book1 = Book(1,'1984','George Orwell',1949)
-book2 = Book(2,'Law','PLato',1979)
-book3 = Book(3,'A Brief History Of Time','Steven Hawking',2020)
-book_repository.add_book(book1)
-print(book_repository.get_all_books())
-book_repository.add_book(book2,book3)
-print(book_repository.get_all_books())
-
-
+print(book_repository.select_all_books_of_specific_publish_year(2020))
+print(book_repository.select_all_books_of_specific_author('George Orwell'))
