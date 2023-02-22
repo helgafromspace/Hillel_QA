@@ -25,16 +25,20 @@ class BookRepository(BaseRepository):
         data = self._cursor.fetchall()
         return data
 
-    def add_book(self, book:Book):
-        self._cursor.execute ("INSERT INTO Book VALUES(?,?,?,?);", (book.book_id,book.title,book.author,book.publish_year))
+    def add_book(self, *books):
+        for book in books:
+            self._cursor.execute ("INSERT INTO Book VALUES(?,?,?,?);", (book.book_id,book.title,book.author,book.publish_year))
+
 
 book_repository = BookRepository()
 print(book_repository.get_all_books())
 
 book1 = Book(1,'1984','George Orwell',1949)
-print(book1)
+book2 = Book(2,'Law','PLato',1979)
+book3 = Book(3,'A Brief History Of Time','Steven Hawking',2020)
 book_repository.add_book(book1)
 print(book_repository.get_all_books())
-# print(book_repository.get_all_books())
+book_repository.add_book(book2,book3)
+print(book_repository.get_all_books())
 
 
