@@ -33,17 +33,17 @@ class BookRepository(BaseRepository):
         self._cursor.execute ("UPDATE Book SET publish_year = ? where publish_year = ? and title = ?;", (new_year,old_year,title))
 
     def select_all_books_of_specific_publish_year(self,year:int):
-        self._cursor.execute ("select title,author,publish_year from Book where publish_year = ?;",[year])
+        self._cursor.execute ("select title,author,publish_year from Book where publish_year = ?;", (year,))
         data = self._cursor.fetchall()
         return [self.row2object(row) for row in data]
 
     def select_all_books_of_specific_author(self,author):
-        self._cursor.execute ("select title,author,publish_year from Book where author = ?;",[author])
+        self._cursor.execute ("select title,author,publish_year from Book where author = ?;",(author,))
         data = self._cursor.fetchall()
         return [self.row2object(row) for row in data]
 
     def delete_all_books_of_specific_author(self,author):
-        self._cursor.execute ("delete from Book where author = ?;", [author])
+        self._cursor.execute ("delete from Book where author = ?;", (author,))
 
     def row2object(self,row):
         return Book(row[0],row[1],row[2])
