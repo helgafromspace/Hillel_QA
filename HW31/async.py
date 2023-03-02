@@ -57,17 +57,19 @@ def letter_counter_in_one_thread(directory, letter_to_find)
 #
 # print(letter_counter_in_one_thread('files'))
 
-def letter_counter_in_one_thread(directory, letter_to_find = 0):
+def letter_counter_in_one_thread(directory, letter_to_find={}):
     files_list = os.listdir(directory)
+    result = 0
     for i in files_list:
         f = open(f'{directory}/{i}', 'r')
         text = f.read()
-        letter_to_find += len(text)
-    return letter_to_find
+        result+= len(text)
+    letter_to_find['value'] = result
+    return letter_to_find['value']
 
-# print(letter_counter_in_one_thread('files'))
+print(letter_counter_in_one_thread('files'))
 
-letter_to_find = 0
+letter_to_find = {}
 thread = threading.Thread(target=letter_counter_in_one_thread, args=('files', letter_to_find))
 thread.start()
 thread.join()
