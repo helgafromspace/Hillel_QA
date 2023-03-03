@@ -57,6 +57,7 @@ def letter_counter_in_one_thread(directory, letter_to_find):
         for letter in text:
             if letter_to_find == letter:
                 result += 1
+        f.close()
     return result
 
 
@@ -91,6 +92,7 @@ def letter_counter_in_thread_for_group(directory,group, letter_to_find, index=1,
         for letter in text:
             if letter_to_find == letter:
                 result += 1
+        f.close()
     output[index] = result
     return output[index]
 
