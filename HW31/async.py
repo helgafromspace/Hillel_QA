@@ -82,15 +82,15 @@ def letter_counter_in_one_thread(directory, letter_to_find):
 def letter_counter_in_n_threads(directory, letter_to_find, number_of_threads)
 
 """
-def letter_counter_in_thread_for_group(directory,group, letter_to_find, output ={}):
+def letter_counter_in_thread_for_group(directory,group, letter_to_find, index=1,output ={}):
     result = 0
     for file in group:
         f = open(f'{directory}/{file}', 'r')
         text = f.read()
         if letter_to_find in text:
             result += 1
-    output['value'] = result
-    return output['value']
+    output[index] = result
+    return output[index]
 
 #
 def letter_counter_in_n_threads(directory, number_of_threads, letter_to_find, output=0):
@@ -101,14 +101,14 @@ def letter_counter_in_n_threads(directory, number_of_threads, letter_to_find, ou
         groups += (files_list[:num_of_files],)
         files_list = files_list[num_of_files:]
     thread = [None] * number_of_threads
+    output = [{}] * number_of_threads
     output_one = {}
     for i,group in enumerate(groups):
-        thread[i]=threading.Thread(target=letter_counter_in_thread_for_group,args = (directory,group,letter_to_find,output_one))
+        thread[i]=threading.Thread(target=letter_counter_in_thread_for_group,args = (directory,group,letter_to_find,i,output))
         thread[i].start()
     for i in range(len(thread)):
         thread[i].join()
-        output += output_one['value']
-    return output
+    return sum(output)
 
 
 
@@ -123,10 +123,10 @@ files_directory = 'files'
 letter = 'g'
 number_of_threads = 5
 
-# start_time = time.perf_counter()
-# file_generator(files_directory,11,20)
-# end_time = time.perf_counter()
-# print(f'Function file_generator executed in {end_time-start_time} s')
+start_time = time.perf_counter()
+file_generator(files_directory,11,20)
+end_time = time.perf_counter()
+print(f'Function file_generator executed in {end_time-start_time} s')
 
 start_time = time.perf_counter()
 result_in_one_thread = letter_counter_in_one_thread(files_directory,letter)
