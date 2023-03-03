@@ -23,9 +23,10 @@ def file_generator(directory,number_of_files,size):
     seq = string.digits + string.punctuation + string.ascii_letters
     for i in range(1,number_of_files+1):
         f = open(f'{directory}/file{i}.py','a')
-        rand_num = randint(size/2,size)
-        for _ in range(rand_num):
-            f.write(f'{seq[randint(0,len(seq)-1)]}')
+        rand_num = randint(size//2,size)
+        rand_string = ''.join([seq[randint(0,len(seq)-1)] for i in range(rand_num)])
+        f.write(rand_string)
+        f.close()
 
 #ASCII solution
 
@@ -54,7 +55,7 @@ def letter_counter_in_one_thread(directory, letter_to_find):
         f = open(f'{directory}/{i}', 'r')
         text = f.read()
         if letter_to_find in text:
-            result += len(text)
+            result += 1
     return result
 
 
@@ -87,7 +88,7 @@ def letter_counter_in_thread_for_group(directory,group, letter_to_find, output =
         f = open(f'{directory}/{file}', 'r')
         text = f.read()
         if letter_to_find in text:
-            result += len(text)
+            result += 1
     output['value'] = result
     return output['value']
 
@@ -104,8 +105,9 @@ def letter_counter_in_n_threads(directory, number_of_threads, letter_to_find, ou
     for i,group in enumerate(groups):
         thread[i]=threading.Thread(target=letter_counter_in_thread_for_group,args = (directory,group,letter_to_find,output_one))
         thread[i].start()
-        thread[i].join ()
-        output += output_one['value']
+    for i in range(len(thread)):
+        thread[i].join()
+    output += output_one['value']
     return output
 
 
@@ -121,10 +123,10 @@ files_directory = 'files'
 letter = 'g'
 number_of_threads = 5
 
-start_time = time.perf_counter()
-file_generator(files_directory,10,20)
-end_time = time.perf_counter()
-print(f'Function file_generator executed in {end_time-start_time} s')
+# start_time = time.perf_counter()
+# file_generator(files_directory,11,20)
+# end_time = time.perf_counter()
+# print(f'Function file_generator executed in {end_time-start_time} s')
 
 start_time = time.perf_counter()
 result_in_one_thread = letter_counter_in_one_thread(files_directory,letter)
