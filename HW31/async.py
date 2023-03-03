@@ -107,7 +107,7 @@ def letter_counter_in_n_threads(directory, number_of_threads, letter_to_find, ou
         thread[i].start()
     for i in range(len(thread)):
         thread[i].join()
-    output += output_one['value']
+        output += output_one['value']
     return output
 
 
