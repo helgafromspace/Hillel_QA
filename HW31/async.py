@@ -95,9 +95,9 @@ def letter_counter_in_thread_for_group(directory,group, letter_to_find, output =
 def letter_counter_in_n_threads(directory, number_of_threads, letter_to_find, output=0):
     files_list = os.listdir(directory)
     num_of_files = math.ceil(int(len(files_list)/number_of_threads))
-    groups = []
+    groups = ()
     for i in range(number_of_threads):
-        groups.append(files_list[:num_of_files])
+        groups += (files_list[:num_of_files],)
         files_list = files_list[num_of_files:]
     thread = [None] * number_of_threads
     output_one = {}
