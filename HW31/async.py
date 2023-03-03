@@ -22,11 +22,10 @@ def file_generator(directory,number_of_files,size):
     os.mkdir(path)
     seq = string.digits + string.punctuation + string.ascii_letters
     for i in range(1,number_of_files+1):
-        f = open(f'{directory}/file{i}.py','a')
-        rand_num = randint(size//2,size)
-        rand_string = ''.join([seq[randint(0,len(seq)-1)] for i in range(rand_num)])
-        f.write(rand_string)
-        f.close()
+        with open(f'{directory}/file{i}.py','a') as f:
+            rand_num = randint(size//2,size)
+            rand_string = ''.join([seq[randint(0,len(seq)-1)] for i in range(rand_num)])
+            f.write(rand_string)
 
 #ASCII solution
 
@@ -52,12 +51,9 @@ def letter_counter_in_one_thread(directory, letter_to_find):
     files_list = os.listdir(directory)
     result = 0
     for i in files_list:
-        f = open(f'{directory}/{i}', 'r')
-        text = f.read()
-        for letter in text:
-            if letter_to_find == letter:
-                result += 1
-        f.close()
+        with open(f'{directory}/{i}', 'r') as f:
+            text = f.read()
+            result = text.count(letter_to_find)
     return result
 
 
@@ -87,12 +83,9 @@ def letter_counter_in_n_threads(directory, letter_to_find, number_of_threads)
 def letter_counter_in_thread_for_group(directory,group, letter_to_find, index=1,output ={}):
     result = 0
     for file in group:
-        f = open(f'{directory}/{file}', 'r')
-        text = f.read()
-        for letter in text:
-            if letter_to_find == letter:
-                result += 1
-        f.close()
+        with open(f'{directory}/{file}', 'r') as f:
+            text = f.read()
+            result = text.count(letter_to_find)
     output[index] = result
     return output[index]
 
@@ -124,13 +117,13 @@ def letter_counter_in_n_threads(directory, number_of_threads, letter_to_find, ou
 
 
 files_directory = 'files'
-letter = 'g'
+letter = 'c'
 number_of_threads = 5
 
-start_time = time.perf_counter()
-file_generator(files_directory,11,20)
-end_time = time.perf_counter()
-print(f'Function file_generator executed in {end_time-start_time} s')
+# start_time = time.perf_counter()
+# file_generator(files_directory,11,20)
+# end_time = time.perf_counter()
+# print(f'Function file_generator executed in {end_time-start_time} s')
 
 start_time = time.perf_counter()
 result_in_one_thread = letter_counter_in_one_thread(files_directory,letter)
