@@ -16,19 +16,16 @@ import math
 import time
 
 
-# def file_generator(directory,number_of_files,size):
-#     parent_dir = os.path.split(__file__)[0]
-#     path = os.path.join (parent_dir, directory)
-#     os.mkdir(path)
-#     seq = string.digits + string.punctuation + string.ascii_letters
-#     for i in range(1,number_of_files+1):
-#         f = open(f'{directory}/file{i}.py','a')
-#         rand_num = randint(size/2,size)
-#         for _ in range(rand_num):
-#             f.write(f'{seq[randint(0,len(seq)-1)]}')
-#
-# file_generator('files',10,20)
-
+def file_generator(directory,number_of_files,size):
+    parent_dir = os.path.split(__file__)[0]
+    path = os.path.join (parent_dir, directory)
+    os.mkdir(path)
+    seq = string.digits + string.punctuation + string.ascii_letters
+    for i in range(1,number_of_files+1):
+        f = open(f'{directory}/file{i}.py','a')
+        rand_num = randint(size/2,size)
+        for _ in range(rand_num):
+            f.write(f'{seq[randint(0,len(seq)-1)]}')
 
 #ASCII solution
 
@@ -60,11 +57,9 @@ def letter_counter_in_one_thread(directory, letter_to_find):
             result += len(text)
     return result
 
-print(f"letter_counter_in_one_thread result: {letter_counter_in_one_thread('files','g')}")
 
 
-
-# def letter_counter_in_one_thread(directory, letter_to_find, output={}):
+# def letter_counter_in_one_thread2(directory, letter_to_find, output={}):
 #     files_list = sorted(os.listdir(directory))
 #     result = 0
 #     for i in files_list:
@@ -74,8 +69,7 @@ print(f"letter_counter_in_one_thread result: {letter_counter_in_one_thread('file
 #             result += len(text)
 #     output['value'] = result
 #     return output['value']
-#
-# print(f"letter_counter_in_one_thread result: {letter_counter_in_one_thread('files','g')}")
+
 
 """
 3. Написать функцию, которая возвращает число букв `letter_to_find` во всех файлах директории `directory`
@@ -114,8 +108,6 @@ def letter_counter_in_n_threads(directory, number_of_threads, letter_to_find, ou
         output += output_one['value']
     return output
 
-print(f"letter_counter_in_n_threads result: {letter_counter_in_n_threads('files',5,'g')}")
-
 
 
 """
@@ -123,3 +115,25 @@ print(f"letter_counter_in_n_threads result: {letter_counter_in_n_threads('files'
  и выводит время выполнения функций.
 
 """
+
+
+files_directory = 'files'
+letter = 'g'
+number_of_threads = 5
+
+start_time = time.perf_counter()
+file_generator(files_directory,10,20)
+end_time = time.perf_counter()
+print(f'Function file_generator executed in {end_time-start_time} s')
+
+start_time = time.perf_counter()
+result_in_one_thread = letter_counter_in_one_thread(files_directory,letter)
+end_time = time.perf_counter()
+print(f"letter_counter_in_one_thread result: {result_in_one_thread}")
+print(f'Function letter_counter_in_one_thread executed in {end_time-start_time} s')
+
+start_time = time.perf_counter()
+result_in_n_threads = letter_counter_in_n_threads(files_directory,number_of_threads,letter)
+end_time = time.perf_counter()
+print(f"letter_counter_in_n_threads result: {result_in_n_threads}")
+print(f'Function letter_counter_in_n_threads executed in {end_time-start_time} s')
