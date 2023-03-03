@@ -54,8 +54,9 @@ def letter_counter_in_one_thread(directory, letter_to_find):
     for i in files_list:
         f = open(f'{directory}/{i}', 'r')
         text = f.read()
-        if letter_to_find in text:
-            result += 1
+        for letter in text:
+            if letter_to_find == letter:
+                result += 1
     return result
 
 
@@ -87,8 +88,9 @@ def letter_counter_in_thread_for_group(directory,group, letter_to_find, index=1,
     for file in group:
         f = open(f'{directory}/{file}', 'r')
         text = f.read()
-        if letter_to_find in text:
-            result += 1
+        for letter in text:
+            if letter_to_find == letter:
+                result += 1
     output[index] = result
     return output[index]
 
