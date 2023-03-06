@@ -22,7 +22,7 @@ def file_generator(directory,number_of_files,size):
     os.mkdir(path)
     seq = string.digits + string.punctuation + string.ascii_letters
     for i in range(1,number_of_files+1):
-        with open(f'{directory}/file{i}.py','a') as f:
+        with open(f'{directory}/file{i}.txt','a') as f:
             rand_num = randint(size//2,size)
             rand_string = ''.join([seq[randint(0,len(seq)-1)] for i in range(rand_num)])
             f.write(rand_string)
@@ -53,7 +53,7 @@ def letter_counter_in_one_thread(directory, letter_to_find):
     for i in files_list:
         with open(f'{directory}/{i}', 'r') as f:
             text = f.read()
-            result = text.count(letter_to_find)
+            result += text.count(letter_to_find)
     return result
 
 
@@ -80,26 +80,25 @@ def letter_counter_in_one_thread(directory, letter_to_find):
 def letter_counter_in_n_threads(directory, letter_to_find, number_of_threads)
 
 """
-def letter_counter_in_thread_for_group(directory,group, letter_to_find, index=1,output ={}):
+def letter_counter_in_thread_for_group(directory,group, letter_to_find, index=0,output ={}):
     result = 0
     for file in group:
         with open(f'{directory}/{file}', 'r') as f:
             text = f.read()
-            result = text.count(letter_to_find)
+            result += text.count(letter_to_find)
     output[index] = result
     return output[index]
 
 #
-def letter_counter_in_n_threads(directory, number_of_threads, letter_to_find, output=0):
+def letter_counter_in_n_threads(directory, number_of_threads, letter_to_find):
     files_list = os.listdir(directory)
     num_of_files = math.ceil(int(len(files_list)/number_of_threads))
     groups = ()
-    for i in range(number_of_threads):
+    for i in range(number_of_threads+1):
         groups += (files_list[:num_of_files],)
         files_list = files_list[num_of_files:]
-    thread = [None] * number_of_threads
-    output = [{}] * number_of_threads
-    output_one = {}
+    thread = [None] * (number_of_threads+1)
+    output = [{}] * (number_of_threads+1)
     for i,group in enumerate(groups):
         thread[i]=threading.Thread(target=letter_counter_in_thread_for_group,args = (directory,group,letter_to_find,i,output))
         thread[i].start()
@@ -120,10 +119,10 @@ files_directory = 'files'
 letter = 'c'
 number_of_threads = 5
 
-# start_time = time.perf_counter()
-# file_generator(files_directory,11,20)
-# end_time = time.perf_counter()
-# print(f'Function file_generator executed in {end_time-start_time} s')
+start_time = time.perf_counter()
+file_generator(files_directory,11,20)
+end_time = time.perf_counter()
+print(f'Function file_generator executed in {end_time-start_time} s')
 
 start_time = time.perf_counter()
 result_in_one_thread = letter_counter_in_one_thread(files_directory,letter)
